@@ -2,7 +2,7 @@ package com.shopping_mall.entity;
 
 public class DomainObject {
 
-    private int id;
+    protected Integer id;
     
     public DomainObject() {
 

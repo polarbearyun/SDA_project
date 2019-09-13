@@ -1,7 +1,6 @@
 package com.shopping_mall.entity;
 
-public class Product {
-    private Integer id;
+public class Product extends DomainObject{
 
     private String name;
 
@@ -14,6 +13,24 @@ public class Product {
     private Integer price;
 
     private String detail;
+
+
+    public Product() {
+
+    }
+
+    public Product(int productId, String name, String picture, Integer inventory, Integer sold_number,
+                Integer price, String detail) {
+        super();
+        this.id = productId;
+        this.name = name;
+        this.picture = picture;
+        this.inventory = inventory;
+        this.sold_number = sold_number;
+        this.price = price;
+        this.detail = detail;
+    }
+
 
     public Integer getId() {
         return id;

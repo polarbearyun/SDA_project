@@ -1,8 +1,11 @@
 package com.shopping_mall.entity;
 
-public class User {
-    private Integer id;
+import com.shopping_mall.mapper.AddressMapper;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.util.ArrayList;
+
+public class User extends DomainObject{
     private String email;
 
     private String name;
@@ -13,7 +16,31 @@ public class User {
 
     private Integer type;
 
-    private Address address;
+    private ArrayList<Address> address;
+
+    private Boolean addressLoaded;
+
+    private ArrayList<Order> order;
+
+    private Boolean orderLoaded;
+
+    public User(){
+
+    }
+
+
+    public User(int userId,String email,String name, Integer phone,String password, Integer type){
+        this.id = userId;
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+        this.password = password;
+        this.type = type;
+        this.addressLoaded = false;
+        this.orderLoaded = false;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -63,11 +90,33 @@ public class User {
         this.type = type;
     }
 
-    public Address getAddress() {
+    public ArrayList<Address> getSchedule() {
+        if(!addressLoaded) {
+            int userId = id;
+            this.address = AddressMapper.findAddressByUserId(userId);
+            this.addressLoaded = true;
+        }
         return address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void reloadAddress() {
+        int userId = id;
+        this.address = AddressMapper.findScheduleByFilmId(userId);
+        this.addressLoaded = true;
+    }
+
+    public ArrayList<Order> getSchedule() {
+        if(!addressLoaded) {
+            int userId = id;
+            this.address = AddressMapper.findAddressByUserId(userId);
+            this.addressLoaded = true;
+        }
+        return address;
+    }
+
+    public void reloadAddress() {
+        int userId = id;
+        this.address = AddressMapper.findScheduleByFilmId(userId);
+        this.addressLoaded = true;
     }
 }

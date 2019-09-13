@@ -1,7 +1,6 @@
 package com.shopping_mall.entity;
 
-public class Item {
-    private Integer id;
+public class Item extends DomainObject{
 
     private Integer amount;
 
@@ -10,6 +9,20 @@ public class Item {
     private Product product;
 
     private Integer total_price;
+
+    public Item(){
+
+    }
+
+    public Item(int itemId, int amount, Order order,Product product,int total_price){
+        super();
+        this.id = itemId;
+        this.amount = amount;
+        this.order = order;
+        this.product = product;
+        this.total_price = total_price;
+    }
+
 
     public Integer getId() {
         return id;
@@ -29,6 +42,9 @@ public class Item {
 
     public Order getOrder() {
         return order;
+    }
+    public int getOrderId() {
+        return order.getId();
     }
 
     public void setOrder(Order order) {
@@ -50,4 +66,7 @@ public class Item {
     public void setTotal_price(Integer total_price) {
         this.total_price = total_price;
     }
+
+
+
 }

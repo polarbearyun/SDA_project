@@ -1,9 +1,11 @@
 package com.shopping_mall.entity;
 
+import com.shopping_mall.mapper.AddressMapper;
+
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Order {
-    private Integer id;
+public class Order extends DomainObject {
 
     private Integer number;
 
@@ -18,6 +20,28 @@ public class Order {
     private String remark;
 
     private Integer status;
+
+    private ArrayList<Item> item;
+
+    private Boolean itemReloaded;
+
+    public Order(){
+
+    }
+
+    public Order(int orderId, int number, User user, float total_price, Date create_time,Date payment_time, String remark, Integer status){
+        super();
+        this.id = orderId;
+        this.number = number;
+        this.user = user;
+        this.total_price = total_price;
+        this.create_time = create_time;
+        this.payment_time = payment_time;
+        this.remark = remark;
+        this.status = status;
+        this.itemReloaded = false;
+    }
+
 
     public Integer getId() {
         return id;
@@ -35,13 +59,15 @@ public class Order {
         this.number = number;
     }
 
+
+    public Integer getUserId() {
+        return user.getId();
+    }
+
     public User getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public Float getTotal_price() {
         return total_price;
@@ -81,5 +107,23 @@ public class Order {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+
+
+
+    public ArrayList<Address> getSchedule() {
+        if(!addressLoaded) {
+            int userId = id;
+            this.address = itemMapper.findAddressByUserId(userId);
+            this.addressLoaded = true;
+        }
+        return address;
+    }
+
+    public void reloadAddress() {
+        int userId = id;
+        this.address = AddressMapper.findScheduleByFilmId(userId);
+        this.addressLoaded = true;
     }
 }

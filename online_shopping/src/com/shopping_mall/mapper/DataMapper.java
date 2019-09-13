@@ -2,9 +2,10 @@ package com.shopping_mall.mapper;
 
 import com.shopping_mall.entity.DomainObject;
 
-public abstract class DataMapper {
+import java.sql.SQLException;
 
-    private DataMapper datamapper;
+public interface DataMapper {
+
 
     public static DataMapper getMapper(Class<? extends DomainObject> objClass) {
         DataMapper dataMapper = null;
@@ -12,26 +13,12 @@ public abstract class DataMapper {
         return dataMapper;
     }
 
-    /**
-     * an abstract function to perform insert action to database
-     * @param object
-     * @return
-     */
-    public abstract boolean insert(DomainObject object);
+    // Insert a new domainObject into database
+    public void insert(DomainObject obj) throws SQLException;
 
-    /**
-     * an abstract function to perform delete action by domainObject's id to database.
-     * @param object
-     * @return
-     * @throws Exception
-     */
-    public abstract boolean delete(DomainObject object) throws Exception;
+    // Update the information of a domainObject in database
+    public void update(DomainObject obj) throws SQLException;
 
-    /**
-     * an abstract function to perform update action by domainObject's id to database.
-     * @param object
-     * @return
-     * @throws Exception
-     */
-    public abstract boolean update(DomainObject object) throws Exception;
+    // Delete a DomainObject in database
+    public void delete(DomainObject obj) throws SQLException;
 }

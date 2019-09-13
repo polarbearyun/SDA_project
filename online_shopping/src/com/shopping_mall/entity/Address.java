@@ -1,14 +1,27 @@
 package com.shopping_mall.entity;
 
-public class Address {
-
-    private Integer id;
+public class Address extends DomainObject {
 
     private String address;
 
     private String state;
 
     private String post_code;
+
+    private User user;
+
+    public Address (){
+
+    }
+
+    public Address(int addressId, String address, String state,String post_code){
+        super();
+        this.id = addressId;
+        this.address = address;
+        this.state = state;
+        this.post_code = post_code;
+    }
+
 
     public Integer getId() {
         return id;

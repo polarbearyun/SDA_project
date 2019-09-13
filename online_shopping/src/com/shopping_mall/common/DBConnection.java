@@ -23,7 +23,7 @@ public class DBConnection {
         return preparedStatement;
     }
 
-    private static Connection getDBConnection(){
+    public static Connection getDBConnection(){
         try{
             // Register JDBC driver
             DriverManager.registerDriver(new org.postgresql.Driver());

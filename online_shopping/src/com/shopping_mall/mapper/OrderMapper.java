@@ -201,7 +201,7 @@ public class OrderMapper implements DataMapper{
         Order order = null;
         try {
             int id = rs.getInt("id");
-            int user_id = rs.getString("user_id");
+            //int user_id = rs.getString("user_id");
             int number = rs.getInt("number");
             float total_price  = rs.getFloat("total_price");
             Date create_time = rs.getDate("create_time");
@@ -209,7 +209,7 @@ public class OrderMapper implements DataMapper{
             String remark = rs.getString("remark");
             int status = rs.getInt("status");
 
-            order = new Order(id, user_id, number, total_price, create_time, payment_time, remark, status);
+           // order = new Order(id, user_id, number, total_price, create_time, payment_time, remark, status);
 
         } catch (SQLException e) {
             e.printStackTrace();

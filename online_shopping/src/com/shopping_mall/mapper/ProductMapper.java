@@ -6,7 +6,10 @@ import com.shopping_mall.entity.DomainObject;
 import com.shopping_mall.entity.Product;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductMapper implements DataMapper {
 
@@ -107,6 +110,65 @@ public class ProductMapper implements DataMapper {
 
         productMap.put(product.getId(), null);
 
+    }
+
+    public ArrayList<Product> getAllProduct(){
+        String findAllProductString = "SELECT * FROM public.product";
+        PreparedStatement findAllStatement = DBConnection.prepare(findAllProductString);
+        ArrayList<Product> productList = new ArrayList<>();
+
+        Product targetProduct = new Product();
+        IdentityMap<Product> productMap = IdentityMap.getInstance(targetProduct);
+
+        try {
+            ResultSet rs = findAllStatement.executeQuery();
+
+            while(rs.next()) {
+                Product product = loadProduct(rs);
+
+                targetProduct = productMap.get(product.getId());
+                if(targetProduct == null) {
+                    productMap.put(product.getId(), product);
+                    productList.add(product);
+                } else {
+                    productList.add(targetProduct);
+                }
+
+            }
+            DBConnection.close(findAllStatement);
+            rs.close();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return productList;
+    }
+
+
+    public static Product loadProduct(ResultSet rs) {
+
+        Product product = null;
+
+        try {
+
+            int productId = rs.getInt("id");
+            String name = rs.getString("name");
+            String picture = rs.getString("picture");
+            Integer inventory = Integer.valueOf(rs.getString("inventory"));
+            Integer sold_number = Integer.valueOf(rs.getString("sold_number"));
+            Integer price =  Integer.valueOf(rs.getString("price"));
+            String detail =  rs.getString("detail");
+
+            product = new Product(productId, name, picture, inventory, sold_number, price, detail);
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return product;
     }
 
 }

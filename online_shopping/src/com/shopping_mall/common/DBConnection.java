@@ -56,4 +56,18 @@ public class DBConnection {
         return null;
     }
 
+
+    public static PreparedStatement prepare(String stm, int returnGenerateKeys){
+
+        PreparedStatement preparedStatement = null;
+        try{
+            Connection dbConnection = getDBConnection();
+
+            preparedStatement = dbConnection.prepareStatement(stm, Statement.RETURN_GENERATED_KEYS);
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return preparedStatement;
+    }
 }

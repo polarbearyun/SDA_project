@@ -8,13 +8,13 @@ public class Item extends DomainObject{
 
     private Product product;
 
-    private Float total_price;
+    private Integer total_price;
 
     public Item(){
 
     }
 
-    public Item(int itemId, int amount, Order order,Product product,float total_price){
+    public Item(int itemId, int amount, Order order,Product product,int total_price){
         super();
         this.id = itemId;
         this.amount = amount;
@@ -59,11 +59,15 @@ public class Item extends DomainObject{
         return product.getId();
     }
 
-    public Float getTotal_price() {
+    public void setProduct(Product product){
+        this.product = product;
+    }
+
+    public Integer getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(Float total_price) {
+    public void setTotal_price(Integer total_price) {
         this.total_price = total_price;
     }
 

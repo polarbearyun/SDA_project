@@ -102,13 +102,13 @@ public class AddressMapper implements DataMapper {
     /**
      * Find all addresses of a user in the Address table of database
      */
-    public static ArrayList<Address> findAddressByUserId(int userId) throws SQLException {
+    public static ArrayList<Address> findAddressByUserId(int userId) {
 
         Address address = null;
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String findAllAddress = "SELECT * SHOP.ADDRESS "
+        String findAllAddress = "SELECT * address "
                 + "WHERE user_id = " + userId;
         PreparedStatement stmt = DBConnection.prepare(findAllAddress);
         ArrayList<Address> addressList = new ArrayList<Address>();

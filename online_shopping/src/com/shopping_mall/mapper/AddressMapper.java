@@ -18,69 +18,57 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String createAddress = "INSERT INTO ADDRESS(id,address,state,post_code) VALUES ('"
-                + address.getId() + "','"
-                + address.getAddress() + "','"
-                + address.getState() + "','"
-                + address.getPost_code() + "')";
+        String createAddress = "INSERT INTO SHOP.ADDRESS "
+                + "(id,address,state,post_code,user_id)"
+                + "VALUES (?,?,?,?,?)";
 
-        PreparedStatement createStatement = DBConnection.prepare(createAddress);
+
+        PreparedStatement stmt = DBConnection.prepare(createAddress);
 
         try {
-            createStatement.execute();
-            System.out.println(createStatement.toString());
+            stmt.setInt(1, address.getId());
+            stmt.setString(2, address.getAddress());
+            stmt.setString(3, address.getState());
+            stmt.setString(4, address.getPost_code());
+            stmt.setInt(5, address.getUser_id());
+            stmt.execute();
+            System.out.println(stmt.toString());
 
-        } catch (Exception e) {
+            DBConnection.close(stmt);
+
+        } catch (SQLException e) {
             System.out.println("Database Operation Error!");
             e.printStackTrace();
-        } finally {
-            try{
-                if (createStatement != null){
-                    createStatement.close();
-                }
-            } catch (SQLException e){
-                System.out.println("Close Error!");
-                e.printStackTrace();
-            }
         }
-
         addressIdentityMap.put(address.getId(), address);
-
     }
+
 
     // Find the address and update one address of a user in the database
     public void update(DomainObject obj) throws SQLException {
 
-        assert !(obj instanceof Address) : "obj is not a user object";
+        assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address) obj;
 
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String updateAddress = "UPDATE ADDRESS SET address='" + address.getAddress() +
+        String updateAddress = "UPDATE SHOP.ADDRESS SET address='" + address.getAddress() +
                 "', + state='" + address.getState() +
+                "', + user_id='" + address.getUser_id() +
                 "', + post_code='" + address.getPost_code() +
                 "' WHERE id='" + address.getId() + "'";
 
-        PreparedStatement updateStatement = DBConnection.prepare(updateAddress);
+        PreparedStatement stmt = DBConnection.prepare(updateAddress);
 
         try {
-            updateStatement.execute();
+            stmt.execute();
+            DBConnection.close(stmt);
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Database Operation Error!");
             e.printStackTrace();
-        } finally {
-            try {
-                if (updateStatement != null) {
-                    updateStatement.close();
-                }
-            } catch (SQLException e) {
-                System.out.println("Close Error!");
-                e.printStackTrace();
-            }
         }
-
         addressIdentityMap.put(address.getId(), address);
     }
 
@@ -88,34 +76,25 @@ public class AddressMapper implements DataMapper {
     // Find the address and delete one address of a user in the database
     public void delete(DomainObject obj) throws SQLException {
 
-        assert !(obj instanceof Address) : "obj is not a user object";
+        assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address)obj;
 
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String deleteAddress = "DELETE * ADDRESS WHERE "
+        String deleteAddress = "DELETE * SHOP.ADDRESS WHERE "
                 + "id = '" + address.getId() + "'";
 
-        PreparedStatement deleteStatement = DBConnection.prepare(deleteAddress);
+        PreparedStatement stmt = DBConnection.prepare(deleteAddress);
 
         try {
-            deleteStatement.execute();
+            stmt.execute();
+            DBConnection.close(stmt);
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Database Operation Error!");
             e.printStackTrace();
-        } finally {
-            try{
-                if (deleteStatement != null){
-                    deleteStatement.close();
-                }
-            } catch (SQLException e){
-                System.out.println("Close Error!");
-                e.printStackTrace();
-            }
         }
-
         addressIdentityMap.put(address.getId(), null);
     }
 
@@ -123,47 +102,59 @@ public class AddressMapper implements DataMapper {
     /**
      * Find all addresses of a user in the Address table of database
      */
-    public static ArrayList<Address> findAllAddress(int userId) throws SQLException {
+    public static ArrayList<Address> findAddressByUserId(int userId) throws SQLException {
+
+        Address address = null;
         Address addr = new Address();
-        ResultSet rs = null;
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String findAllAddress = "SELECT * ADDRESS "
+        String findAllAddress = "SELECT * SHOP.ADDRESS "
                 + "WHERE user_id = " + userId;
-        PreparedStatement findAllStatement = DBConnection.prepare(findAllAddress);
+        PreparedStatement stmt = DBConnection.prepare(findAllAddress);
         ArrayList<Address> addressList = new ArrayList<Address>();
 
         try {
-            rs = findAllStatement.executeQuery();
+            ResultSet rs = stmt.executeQuery();
 
             while(rs.next()) {
-                Address address = loadUser(rs);
-                addr = addressIdentityMap.get(address.getUser_id());
+                address = load(rs);
+
+                addr = addressIdentityMap.get(address.getId());
                 if (addr == null) {
                     addressList.add(address);
-                    addressIdentityMap.put(address.getUser_id(), address);
+                    addressIdentityMap.put(address.getId(), address);
                 } else {
                     addressList.add(addr);
                 }
             }
-            return addressList;
+            DBConnection.close(stmt);
+            rs.close();
 
-        } catch (Exception e) {
+
+        } catch (SQLException e) {
             System.out.println("Exception!");
             e.printStackTrace();
-            return null;
-        }finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println("Close Error!");//
-                ex.printStackTrace();
-            }
         }
         return addressList;
     }
 
+    public static Address load(ResultSet rs) {
+
+        Address addr = null;
+        try {
+            int id = rs.getInt("id");
+            int user_id = rs.getInt("user_id");
+            String address = rs.getString("address");
+            String state = rs.getString("state");
+            String post_code = rs.getString("post_code");
+
+            addr = new Address(id, user_id, address, state, post_code);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return addr;
+    }
 
 }

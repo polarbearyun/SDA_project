@@ -20,6 +20,10 @@ public class UnitOfWork {
         current.set(uow);
     }
 
+    public static UnitOfWork getCurrent() {
+        return (UnitOfWork) current.get();
+    }
+
     public void registerNew(DomainObject obj){
         assert obj.getId() != null : "id is null";
         assert !dirtyObjects.contains(obj) :"object is dirty";
@@ -61,6 +65,10 @@ public class UnitOfWork {
         for (DomainObject obj : deletedObjects){
             DataMapper.getMapper(obj.getClass()).delete(obj);
         }
+
+        this.newObjects = new ArrayList<DomainObject>();
+        this.dirtyObjects = new ArrayList<DomainObject>();
+        this.deletedObjects = new ArrayList<DomainObject>();
     }
 
 }

@@ -19,7 +19,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String createUser = "INSERT INTO SHOP.USER "
+        String createUser = "INSERT INTO USER "
                 + "(id,email,name,phone,password,type)"
                 + "VALUES (?,?,?,?,?,?)";
 
@@ -29,7 +29,7 @@ public class UserMapper implements DataMapper{
             stmt.setInt(1, user.getId());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getName());
-            stmt.setInt(4, user.getPhone());
+            stmt.setString(4, user.getPhone());
             stmt.setString(5, user.getPassword());
             stmt.setInt(6, user.getType());
             stmt.execute();
@@ -55,7 +55,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String updateUser = "UPDATE SHOP.USER SET email='" + user.getEmail() +
+        String updateUser = "UPDATE USER SET email='" + user.getEmail() +
                 "', + name='" + user.getName() +
                 "', + phone='" + user.getPhone() +
                 "', + password='" + user.getPassword() +
@@ -85,7 +85,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String deleteUser = "DELETE * SHOP.USER WHERE "
+        String deleteUser = "DELETE * USER WHERE "
                 + "id = '" + user.getId() + "'";
 
         PreparedStatement stmt = DBConnection.prepare(deleteUser);
@@ -112,7 +112,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findUserByName = "SELECT * FROM SHOP.USER "
+        String findUserByName = "SELECT * FROM USER "
                 + "WHERE name = '" + username + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findUserByName);
@@ -151,7 +151,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findUserByEmail = "SELECT * FROM SHOP.USER "
+        String findUserByEmail = "SELECT * FROM USER "
                 + "WHERE email = '" + email + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findUserByEmail);
@@ -189,7 +189,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findAllUsers = "SELECT * FROM SHOP.USER";
+        String findAllUsers = "SELECT * FROM USER";
         PreparedStatement stmt = DBConnection.prepare(findAllUsers);
         ArrayList<User> userList = new ArrayList<User>();
 
@@ -224,7 +224,7 @@ public class UserMapper implements DataMapper{
             int id = rs.getInt("id");
             String email = rs.getString("email");
             String name = rs.getString("name");
-            int phone = rs.getInt("phone");
+            String phone = rs.getString("phone");
             String password = rs.getString("password");
             int type = rs.getInt("type");
 

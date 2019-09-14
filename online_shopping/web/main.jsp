@@ -69,7 +69,7 @@
 <!-- /添加到购物车 -->
 
 <script src="${ctx}/zui/lib/jquery/jquery.js"></script>
-<script src="${ctx}/js/jquery.scrollUp.min.js"></script>
+<script src="${ctx}/js/jquery/scrollUp/min.js"></script>
 <script src="${ctx}/zui/js/zui.js"></script>
 <script src="${ctx}/js/my.js"></script>
 </body>

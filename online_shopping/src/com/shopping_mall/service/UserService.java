@@ -26,21 +26,21 @@ public class UserService {
 
     }
 
-    public void updateUser(User user) throws Exception {
-
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerDirty(user);
-        UnitOfWork.getCurrent().commit();
-
-    }
-
-    public void deleteUser(User user) throws Exception {
-
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerDeleted(user);
-        UnitOfWork.getCurrent().commit();
-
-    }
+//    public void updateUser(User user) throws Exception {
+//
+//        UnitOfWork.newCurrent();
+//        UnitOfWork.getCurrent().registerDirty(user);
+//        UnitOfWork.getCurrent().commit();
+//
+//    }
+//
+//    public void deleteUser(User user) throws Exception {
+//
+//        UnitOfWork.newCurrent();
+//        UnitOfWork.getCurrent().registerDeleted(user);
+//        UnitOfWork.getCurrent().commit();
+//
+//    }
 
 
     /**

@@ -108,7 +108,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String findAllAddress = "SELECT * address "
+        String findAllAddress = "SELECT * from address "
                 + "WHERE user_id = " + userId;
         PreparedStatement stmt = DBConnection.prepare(findAllAddress);
         ArrayList<Address> addressList = new ArrayList<Address>();
@@ -138,6 +138,42 @@ public class AddressMapper implements DataMapper {
         return addressList;
     }
 
+    public static Address findAddressById(int addressId){
+        Address address = null;
+        Address addr = new Address();
+        IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
+
+        String findAllAddress = "SELECT * from address "
+                + "WHERE id = " + addressId;
+        PreparedStatement stmt = DBConnection.prepare(findAllAddress);
+        Address addressRes = new Address();
+
+        try {
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                address = load(rs);
+
+                addr = addressIdentityMap.get(address.getId());
+                if (addr == null) {
+                    addressRes = addr;
+                    addressIdentityMap.put(address.getId(), address);
+                } else {
+                    addressRes = addr;
+                }
+            }
+            DBConnection.close(stmt);
+            rs.close();
+
+
+        } catch (SQLException e) {
+            System.out.println("Exception!");
+            e.printStackTrace();
+        }
+        return addressRes;
+    }
+
+
     public static Address load(ResultSet rs) {
 
         Address addr = null;
@@ -148,7 +184,7 @@ public class AddressMapper implements DataMapper {
             String state = rs.getString("state");
             String post_code = rs.getString("post_code");
 
-            //addr = new Address(id, user_id, address, state, post_code);
+            addr = new Address(id,  address, state, post_code);
 
         } catch (SQLException e) {
             e.printStackTrace();

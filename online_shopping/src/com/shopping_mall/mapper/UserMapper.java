@@ -151,7 +151,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findUserByEmail = "SELECT * FROM USER "
+        String findUserByEmail = "SELECT * FROM member "
                 + "WHERE email = '" + email + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findUserByEmail);

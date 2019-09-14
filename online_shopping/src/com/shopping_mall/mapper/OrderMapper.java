@@ -13,16 +13,16 @@ import java.util.ArrayList;
 
 public class OrderMapper implements DataMapper{
 
-    public void insert(DomainObject obj) throws SQLException {
+    public void insert(DomainObject obj) {
         assert !(obj instanceof Order) : "obj is not an order object";
         Order order = (Order)obj;
 
         Order targetOrder = new Order();
-        IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
+       // IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String createOrder = "INSERT INTO SHOP.ORDER "
-                + "(id,user_id,number,total_price,create_time,payment_time,remark,status)"
-                + "VALUES (?,?,?,?,?,?,?,?)";
+        String createOrder = "INSERT INTO t_order"
+                + "(id,user_id, total_price, remark, status, order_number)"
+                + "VALUES (?,?,?,?,?,?)";
 
 
         PreparedStatement stmt = DBConnection.prepare(createOrder);
@@ -31,12 +31,13 @@ public class OrderMapper implements DataMapper{
 
             stmt.setInt(1, order.getId());
             stmt.setInt(2, order.getUserId());
-            stmt.setInt(3, order.getNumber());
-            stmt.setFloat(4, order.getTotal_price());
-            stmt.setDate(5, (Date) order.getCreate_time());
-            stmt.setDate(6, (Date) order.getPayment_time());
-            stmt.setString(7, order.getRemark());
-            stmt.setInt(8, order.getStatus());
+
+            stmt.setFloat(3, order.getTotal_price());
+//            stmt.setDate(4, (Date) order.getCreate_time());
+//            stmt.setDate(5, (Date) order.getPayment_time());
+            stmt.setString(4, order.getRemark());
+            stmt.setInt(5, order.getStatus());
+            stmt.setString(6, order.getNumber());
             stmt.execute();
             System.out.println(stmt.toString());
 
@@ -47,7 +48,9 @@ public class OrderMapper implements DataMapper{
             e.printStackTrace();
         }
 
-        orderIdentityMap.put(order.getId(), order);
+
+
+        //orderIdentityMap.put(order.getId(), order);
     }
 
 
@@ -161,13 +164,13 @@ public class OrderMapper implements DataMapper{
     /**
      * Find all order by the user id in the database
      */
-    public static ArrayList<Order> findOrdersByUserId(int user_id) throws SQLException {
+    public static ArrayList<Order> findOrdersByUserId(int user_id) {
 
         Order order = null;
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String findOrdersByUserId = "SELECT * FROM SHOP.ORDER where user_id=" + "'" + user_id + "'";
+        String findOrdersByUserId = "SELECT * FROM t_order where user_id=" + "'" + user_id + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findOrdersByUserId);
         ArrayList<Order> orderList = new ArrayList<Order>();
@@ -193,7 +196,49 @@ public class OrderMapper implements DataMapper{
             System.out.println("Exception!");
             e.printStackTrace();
         }
+
+        for(Order oder : orderList){
+            oder.reloadItem();
+        }
+
         return orderList;
+    }
+
+    public static ArrayList<Order> findAllOrders(){
+
+        Order order = null;
+        Order targetOrder = new Order();
+        IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
+
+        String findOrders = "SELECT * FROM t_order";
+
+        PreparedStatement stmt = DBConnection.prepare(findOrders);
+        ArrayList<Order> orderList = new ArrayList<Order>();
+
+        try {
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                order = load(rs);
+
+                targetOrder = orderIdentityMap.get(order.getId());
+                if (targetOrder == null) {
+                    orderList.add(order);
+                    orderIdentityMap.put(order.getId(), order);
+                } else {
+                    orderList.add(targetOrder);
+                }
+            }
+            DBConnection.close(stmt);
+            rs.close();
+
+        } catch (SQLException e) {
+            System.out.println("Exception!");
+            e.printStackTrace();
+        }
+        return orderList;
+
+
     }
 
     public static Order load(ResultSet rs) {
@@ -201,15 +246,15 @@ public class OrderMapper implements DataMapper{
         Order order = null;
         try {
             int id = rs.getInt("id");
-            //int user_id = rs.getString("user_id");
-            int number = rs.getInt("number");
-            float total_price  = rs.getFloat("total_price");
+            int user_id = rs.getInt("user_id");
+            String order_number = rs.getString("order_number");
+            int total_price  = rs.getInt("total_price");
             Date create_time = rs.getDate("create_time");
             Date payment_time = rs.getDate("payment_time");
             String remark = rs.getString("remark");
             int status = rs.getInt("status");
 
-           // order = new Order(id, user_id, number, total_price, create_time, payment_time, remark, status);
+            order = new Order(id, order_number, user_id, total_price, create_time, payment_time, remark, status);
 
         } catch (SQLException e) {
             e.printStackTrace();

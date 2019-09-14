@@ -90,19 +90,19 @@ public class User extends DomainObject{
         this.type = type;
     }
 
-    public ArrayList<Address> getAddress() {
-        if(!addressLoaded) {
-            int userId = id;
-            this.address = AddressMapper.findAddressByUserId(userId);
-            this.addressLoaded = true;
-        }
-        return address;
-    }
-
-    public void reloadAddress() {
-        int userId = id;
-        this.address = AddressMapper.findScheduleByFilmId(userId);
-        this.addressLoaded = true;
-    }
+//    public ArrayList<Address> getAddress() {
+//        if(!addressLoaded) {
+//            int userId = id;
+//            this.address = AddressMapper.findAddressByUserId(userId);
+//            this.addressLoaded = true;
+//        }
+//        return address;
+//    }
+//
+//    public void reloadAddress() {
+//        int userId = id;
+//        this.address = AddressMapper.findScheduleByFilmId(userId);
+//        this.addressLoaded = true;
+//    }
 
 }

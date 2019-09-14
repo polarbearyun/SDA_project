@@ -12,7 +12,7 @@ public class Order extends DomainObject {
 
     private User user;
 
-    private Float total_price;
+    private Integer total_price;
 
     private Date create_time;
 
@@ -30,7 +30,7 @@ public class Order extends DomainObject {
 
     }
 
-    public Order(int orderId, int number, User user, float total_price, Date create_time,Date payment_time, String remark, Integer status){
+    public Order(int orderId, int number, User user, int total_price, Date create_time,Date payment_time, String remark, Integer status){
         super();
         this.id = orderId;
         this.number = number;
@@ -70,11 +70,11 @@ public class Order extends DomainObject {
     }
 
 
-    public Float getTotal_price() {
+    public Integer getTotal_price() {
         return total_price;
     }
 
-    public void setTotal_price(Float total_price) {
+    public void setTotal_price(Integer total_price) {
         this.total_price = total_price;
     }
 
@@ -113,18 +113,18 @@ public class Order extends DomainObject {
 
 
 
-    public ArrayList<Item> getItem() {
-        if(!itemLoaded) {
-            int orderId = id;
-            this.item = ItemMapper.findAddressByUserId(orderId);
-            this.itemLoaded = true;
-        }
-        return item;
-    }
-
-    public void reloadAddress() {
-        int orderId = id;
-        this.item = AddressMapper.findScheduleByFilmId(orderId);
-        this.itemLoaded = true;
-    }
+//    public ArrayList<Item> getItem() {
+//        if(!itemLoaded) {
+//            int orderId = id;
+//            this.item = ItemMapper.findAddressByUserId(orderId);
+//            this.itemLoaded = true;
+//        }
+//        return item;
+//    }
+//
+//    public void reloadAddress() {
+//        int orderId = id;
+//        this.item = AddressMapper.findScheduleByFilmId(orderId);
+//        this.itemLoaded = true;
+//    }
 }

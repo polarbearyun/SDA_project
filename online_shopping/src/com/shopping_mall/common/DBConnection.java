@@ -10,7 +10,7 @@ public class DBConnection {
 
     // Database credentials
     private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "******";
+    private static final String DB_PASSWORD = "123";
 
     static Connection dbConnection = null;
 

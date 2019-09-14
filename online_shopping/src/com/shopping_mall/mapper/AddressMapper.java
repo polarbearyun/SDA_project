@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AddressMapper implements DataMapper {
 
     // Find the address and add one address of a user in the database
-    public void insert(DomainObject obj) throws SQLException {
+    public void insert(DomainObject obj) {
         assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address)obj;
 
@@ -30,7 +30,7 @@ public class AddressMapper implements DataMapper {
             stmt.setString(2, address.getAddress());
             stmt.setString(3, address.getState());
             stmt.setString(4, address.getPost_code());
-            stmt.setInt(5, address.getUser_id());
+            //stmt.setInt(5, address.getUser_id());
             stmt.execute();
             System.out.println(stmt.toString());
 
@@ -45,7 +45,7 @@ public class AddressMapper implements DataMapper {
 
 
     // Find the address and update one address of a user in the database
-    public void update(DomainObject obj) throws SQLException {
+    public void update(DomainObject obj)  {
 
         assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address) obj;
@@ -55,7 +55,7 @@ public class AddressMapper implements DataMapper {
 
         String updateAddress = "UPDATE SHOP.ADDRESS SET address='" + address.getAddress() +
                 "', + state='" + address.getState() +
-                "', + user_id='" + address.getUser_id() +
+                //"', + user_id='" + address.getUser_id() +
                 "', + post_code='" + address.getPost_code() +
                 "' WHERE id='" + address.getId() + "'";
 
@@ -148,7 +148,7 @@ public class AddressMapper implements DataMapper {
             String state = rs.getString("state");
             String post_code = rs.getString("post_code");
 
-            addr = new Address(id, user_id, address, state, post_code);
+            //addr = new Address(id, user_id, address, state, post_code);
 
         } catch (SQLException e) {
             e.printStackTrace();

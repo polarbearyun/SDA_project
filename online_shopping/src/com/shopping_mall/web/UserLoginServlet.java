@@ -68,7 +68,7 @@ public class UserLoginServlet extends HttpServlet {
 
                     request.getRequestDispatcher("/orders.jsp").forward(request, response);;
                 }else{
-                    response.sendRedirect(request.getContextPath() + "/member/profile.jsp");
+                    response.sendRedirect(request.getContextPath() + "/main");
                 }
 
             }else{

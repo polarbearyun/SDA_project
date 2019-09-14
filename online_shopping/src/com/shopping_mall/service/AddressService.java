@@ -49,4 +49,9 @@ public class AddressService {
         return addressList;
     }
 
+    public Address viewOneAddressById(int addressId) {
+        Address address = AddressMapper.findAddressById(addressId);
+        return address;
+    }
+
 }

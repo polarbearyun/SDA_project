@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet("/submit_order")
-public class submitOrderServlet extends HttpServlet {
+public class SubmitOrderServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
 
@@ -35,7 +35,7 @@ public class submitOrderServlet extends HttpServlet {
         int allAmount = 0;
 
         Integer total_price = 0;
-        List<Item> items = new ArrayList<Item>();
+        ArrayList<Item> items = new ArrayList<Item>();
 
         int length = idStrs == null ? 0 : idStrs.length;
         for(int i = 0; i < length; i++){
@@ -49,11 +49,11 @@ public class submitOrderServlet extends HttpServlet {
             //把购物车中的每个商品都转换成一个订单项对象
             Item item = new Item();
             item.setAmount(amount);
-            item.setProduct(product);
+            item.setProduct_id(id);
 
 
             int number = amount;
-            int item_total_price = product.getPrice()*number;
+            int item_total_price = product.getPrice() * number;
             item.setTotal_price(item_total_price);
 
             items.add(item);//
@@ -68,14 +68,14 @@ public class submitOrderServlet extends HttpServlet {
 
         //订单实体类
         Order order = new Order();
-        //order.setItems(items); //订单的每个订单项
+        order.setItem(items); //订单的每个订单项
         //order.setTotal_amount(allAmount); //订单的总物品数量
         order.setTotal_price(total_price);//订单的总金额
        // order.setPayment_price(allPaymentPrice); //订单的实际支付金额
         order.setCreate_time(new Date());
 
         //把当前订单数据存储到session中
-        session.setAttribute("curr_order", order);
+        session.setAttribute("current_order", order);
 
 
 
@@ -84,7 +84,7 @@ public class submitOrderServlet extends HttpServlet {
         if(user == null){ //没有登录，就跳转到登录页面
 
             request.setAttribute("msg", "提交订单前,请先登录!");
-            request.getRequestDispatcher("/member_login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
 
         }else{//登录后的，跳转结算页面
             AddressService addressService = new AddressService();

@@ -8,9 +8,9 @@ import java.util.Date;
 
 public class Order extends DomainObject {
 
-    private Integer number;
+    private String number;
 
-    private User user;
+    private Integer user_id;
 
     private Integer total_price;
 
@@ -24,17 +24,21 @@ public class Order extends DomainObject {
 
     private ArrayList<Item> item;
 
+
+
     private Boolean itemLoaded;
+
+
 
     public Order(){
 
     }
 
-    public Order(int orderId, int number, User user, int total_price, Date create_time,Date payment_time, String remark, Integer status){
+    public Order(int orderId, String number, int user_id, int total_price, Date create_time,Date payment_time, String remark, Integer status){
         super();
         this.id = orderId;
         this.number = number;
-        this.user = user;
+        this.user_id = user_id;
         this.total_price = total_price;
         this.create_time = create_time;
         this.payment_time = payment_time;
@@ -52,21 +56,22 @@ public class Order extends DomainObject {
         this.id = id;
     }
 
-    public Integer getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
 
     public Integer getUserId() {
-        return user.getId();
+        return user_id;
     }
 
-    public User getUser() {
-        return user;
+
+    public void setUserId(Integer user_id) {
+        this.user_id = user_id;
     }
 
 
@@ -110,21 +115,32 @@ public class Order extends DomainObject {
         this.status = status;
     }
 
+    public Boolean getItemLoaded() {
+        return itemLoaded;
+    }
+
+    public void setItemLoaded(Boolean itemLoaded) {
+        this.itemLoaded = itemLoaded;
+    }
+
+    public void setItem(ArrayList<Item> item) {
+        this.item = item;
+    }
 
 
 
-//    public ArrayList<Item> getItem() {
-//        if(!itemLoaded) {
-//            int orderId = id;
-//            this.item = ItemMapper.findAddressByUserId(orderId);
-//            this.itemLoaded = true;
-//        }
-//        return item;
-//    }
-//
-//    public void reloadAddress() {
-//        int orderId = id;
-//        this.item = AddressMapper.findScheduleByFilmId(orderId);
-//        this.itemLoaded = true;
-//    }
+    public ArrayList<Item> getItem() {
+        if(!itemLoaded) {
+            int orderId = id;
+            this.item = ItemMapper.findAddressByUserId(orderId);
+            this.itemLoaded = true;
+        }
+        return item;
+    }
+
+    public void reloadItem() {
+        int orderId = id;
+        this.item = ItemMapper.findAddressByUserId(orderId);
+        this.itemLoaded = true;
+    }
 }

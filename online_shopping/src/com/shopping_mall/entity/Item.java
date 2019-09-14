@@ -4,9 +4,11 @@ public class Item extends DomainObject{
 
     private Integer amount;
 
-    private Order order;
+    private Integer order_id;
 
-    private Product product;
+    private Integer product_id;
+
+
 
     private Integer total_price;
 
@@ -14,12 +16,12 @@ public class Item extends DomainObject{
 
     }
 
-    public Item(int itemId, int amount, Order order,Product product,int total_price){
+    public Item(int itemId, int amount, int order,int product,int total_price){
         super();
         this.id = itemId;
         this.amount = amount;
-        this.order = order;
-        this.product = product;
+        this.order_id = order;
+        this.product_id = product;
         this.total_price = total_price;
     }
 
@@ -40,28 +42,22 @@ public class Item extends DomainObject{
         this.amount = amount;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-    public int getOrderId() {
-        return order.getId();
+    public Integer getOrder_id() {
+        return order_id;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder_id(Integer order_id) {
+        this.order_id = order_id;
     }
 
-    public Product getProduct() {
-        return product;
+    public Integer getProduct_id() {
+        return product_id;
     }
 
-    public int getProductId() {
-        return product.getId();
+    public void setProduct_id(Integer product_id) {
+        this.product_id = product_id;
     }
 
-    public void setProduct(Product product){
-        this.product = product;
-    }
 
     public Integer getTotal_price() {
         return total_price;

@@ -1,6 +1,6 @@
 package com.shopping_mall.mapper;
 
-import com.shopping_mall.entity.DomainObject;
+import com.shopping_mall.entity.*;
 
 import java.sql.SQLException;
 
@@ -9,6 +9,16 @@ public interface DataMapper {
 
     public static DataMapper getMapper(Class<? extends DomainObject> objClass) {
         DataMapper dataMapper = null;
+        if(objClass == Address.class)
+            dataMapper = new AddressMapper();
+        else if (objClass == User.class)
+            dataMapper = new UserMapper();
+        else if (objClass == Product.class)
+            dataMapper = new ProductMapper();
+        else if (objClass == Order.class)
+            dataMapper = new OrderMapper();
+        else if (objClass == Item.class)
+            dataMapper = new ItemMapper();
 
         return dataMapper;
     }

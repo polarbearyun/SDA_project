@@ -10,7 +10,7 @@ public class User extends DomainObject{
 
     private String name;
 
-    private Integer phone;
+    private String phone;
 
     private String password;
 
@@ -29,7 +29,7 @@ public class User extends DomainObject{
     }
 
 
-    public User(int userId,String email,String name, Integer phone,String password, Integer type){
+    public User(int userId,String email,String name, String phone,String password, Integer type){
         this.id = userId;
         this.email = email;
         this.name = name;
@@ -66,11 +66,11 @@ public class User extends DomainObject{
         this.name = name;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

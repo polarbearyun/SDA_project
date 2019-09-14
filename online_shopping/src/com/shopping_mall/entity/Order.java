@@ -1,6 +1,7 @@
 package com.shopping_mall.entity;
 
 import com.shopping_mall.mapper.AddressMapper;
+import com.shopping_mall.mapper.ItemMapper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +24,7 @@ public class Order extends DomainObject {
 
     private ArrayList<Item> item;
 
-    private Boolean itemReloaded;
+    private Boolean itemLoaded;
 
     public Order(){
 
@@ -39,7 +40,7 @@ public class Order extends DomainObject {
         this.payment_time = payment_time;
         this.remark = remark;
         this.status = status;
-        this.itemReloaded = false;
+        this.itemLoaded = false;
     }
 
 
@@ -112,18 +113,18 @@ public class Order extends DomainObject {
 
 
 
-    public ArrayList<Address> getSchedule() {
-        if(!addressLoaded) {
-            int userId = id;
-            this.address = itemMapper.findAddressByUserId(userId);
-            this.addressLoaded = true;
+    public ArrayList<Item> getItem() {
+        if(!itemLoaded) {
+            int orderId = id;
+            this.item = ItemMapper.findAddressByUserId(orderId);
+            this.itemLoaded = true;
         }
-        return address;
+        return item;
     }
 
     public void reloadAddress() {
-        int userId = id;
-        this.address = AddressMapper.findScheduleByFilmId(userId);
-        this.addressLoaded = true;
+        int orderId = id;
+        this.item = AddressMapper.findScheduleByFilmId(orderId);
+        this.itemLoaded = true;
     }
 }

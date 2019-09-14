@@ -3,6 +3,9 @@ import java.sql.*;
 
 public class DBConnection {
     // JDBC driver name and database URL
+
+    static final String JDBC_DRIVER = "org.postgresql.Driver";
+    //static final String DB_URL = "jdbc:postgresql://ec2-50-17-194-129.compute-1.amazonaws.com:5432/d8ai6gphpuhcgm?sslmode=require";
     private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/shop";
 
     // Database credentials
@@ -11,32 +14,46 @@ public class DBConnection {
 
     static Connection dbConnection = null;
 
-    public static PreparedStatement prepare(String stm) throws SQLException{
+    public static PreparedStatement prepare(String stm) {
         PreparedStatement preparedStatement = null;
-        try{
-            Connection dbConnection = getDBConnection();
-
+        try {
+            if (dbConnection == null) {
+                dbConnection = getDBConnection();
+            }
+            System.out.println(stm);
             preparedStatement = dbConnection.prepareStatement(stm);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return preparedStatement;
     }
 
-    public static Connection getDBConnection(){
-        try{
-            // Register JDBC driver
-            DriverManager.registerDriver(new org.postgresql.Driver());
-
-            //Open a connection
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-            dbConnection.setAutoCommit(false);
-
-            return dbConnection;
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
+    public static void close(PreparedStatement preparedStatement) {
+        Connection dbConnection;
+        try {
+            preparedStatement.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        System.out.println("Connection problem");
+    }
+
+    private static Connection getDBConnection() {
+        Connection conn = null;
+        try {
+            // register driver
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+            System.out.println("Connect database...");
+            return conn;
+        } catch (SQLException se){
+            // process JDBC error
+            se.printStackTrace();
+        } catch (Exception e){
+            // process Class.forName error
+            e.printStackTrace();
+        }
         return null;
     }
+
 }

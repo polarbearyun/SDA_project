@@ -4,7 +4,9 @@ import com.shopping_mall.common.DBConnection;
 import com.shopping_mall.common.IdentityMap;
 import com.shopping_mall.entity.DomainObject;
 import com.shopping_mall.entity.Product;
+import org.apache.commons.dbutils.DbUtils;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -144,6 +146,37 @@ public class ProductMapper implements DataMapper {
         }
 
         return productList;
+    }
+
+    public static Product findById(int productId){
+
+        Product targetProduct = new Product();
+        IdentityMap<Product> productMap = IdentityMap.getInstance(targetProduct);
+        targetProduct = productMap.get(Long.valueOf(productId));
+        if(targetProduct != null){
+            return targetProduct;
+        }
+
+
+        String findProductString ="SELECT * FROM product WHERE id = " + productId;
+        System.out.println(findProductString);
+        PreparedStatement findAllStatement = DBConnection.prepare(findProductString);
+        Product product = null;
+
+        try {
+            ResultSet rs = findAllStatement.executeQuery();
+            while(rs.next()) {
+                product = loadProduct(rs);
+            }
+            DBConnection.close(findAllStatement);
+            rs.close();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return product;
     }
 
 

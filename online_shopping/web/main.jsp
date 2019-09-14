@@ -8,12 +8,13 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <%--<jsp:include page="/icd_meta.jsp" />--%>
+    <jsp:include page="/icd_meta.jsp" />
     <title>电器城-首页</title>
-    <%--<jsp:include page="/icd_link.jsp" />--%>
+    <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
 <%--<jsp:include page="/icd_top.jsp">--%>
@@ -25,13 +26,7 @@
 <div class="wrapper">
 
     <div class="list">
-        <header style="border: 0">
-            <strong><i class="icon panel-icon icon-heart"
-                       style="color: #0000CC"></i> 猜你喜欢</strong>
-            <div class="pull-right">
-                <a href="${ctx}/product/list?level=hots">更多</a>
-            </div>
-        </header>
+
         <section class="cards cards-condensed row" style="margin: 0">
             <c:forEach items="${products}" var="h">
                 <div class="col-xs-2">
@@ -64,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="${ctx}/main" class="btn btn-primary">继续购物</a> <a
-                        href="${ctx}/view_cart.jsp" class="btn btn-primary"
+                        href="${ctx}/cart.jsp" class="btn btn-primary"
                         style="min-width: 80px">立即结算</a>
                 </div>
             </div>

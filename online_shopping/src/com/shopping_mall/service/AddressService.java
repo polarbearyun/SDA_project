@@ -44,7 +44,7 @@ public class AddressService {
     /**
      * View all relevant address of a user in the database
      */
-    public ArrayList<Address> viewAllAddressOfUser(int userId) throws SQLException {
+    public ArrayList<Address> viewAllAddressOfUser(int userId) {
         ArrayList<Address> addressList = AddressMapper.findAddressByUserId(userId);
         return addressList;
     }

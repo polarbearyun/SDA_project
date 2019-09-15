@@ -16,21 +16,20 @@ public class AddressMapper implements DataMapper {
         Address address = (Address)obj;
 
         Address addr = new Address();
-        IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
+        //IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String createAddress = "INSERT INTO SHOP.ADDRESS "
-                + "(id,address,state,post_code,user_id)"
-                + "VALUES (?,?,?,?,?)";
+        String createAddress = "INSERT INTO address "
+                + "(address, contact_name, post_code, user_id)"
+                + "VALUES (?,?,?,?)";
 
 
         PreparedStatement stmt = DBConnection.prepare(createAddress);
 
         try {
-            stmt.setInt(1, address.getId());
-            stmt.setString(2, address.getAddress());
-            stmt.setString(3, address.getState());
-            stmt.setString(4, address.getPost_code());
-            //stmt.setInt(5, address.getUser_id());
+            stmt.setString(1, address.getAddress());
+            stmt.setString(2, address.getState());
+            stmt.setInt(3, Integer.valueOf(address.getPost_code()));
+            stmt.setInt(4, address.getUser().getId());
             stmt.execute();
             System.out.println(stmt.toString());
 
@@ -40,7 +39,7 @@ public class AddressMapper implements DataMapper {
             System.out.println("Database Operation Error!");
             e.printStackTrace();
         }
-        addressIdentityMap.put(address.getId(), address);
+       // addressIdentityMap.put(address.getId(), address);
     }
 
 
@@ -181,7 +180,7 @@ public class AddressMapper implements DataMapper {
             int id = rs.getInt("id");
             int user_id = rs.getInt("user_id");
             String address = rs.getString("address");
-            String state = rs.getString("state");
+            String state = rs.getString("contact_name");
             String post_code = rs.getString("post_code");
 
             addr = new Address(id,  address, state, post_code);

@@ -16,9 +16,9 @@
 		<div class="row" style="padding: 20px 0px;">
 			<!-- /左边 -->
 			<div class="col-xs-2">
-				<%--<jsp:include page="/member/icd_menu.jsp">--%>
-					<%--<jsp:param value="address" name="tag" />--%>
-				<%--</jsp:include>--%>
+				<jsp:include page="/user/icd_menu.jsp">
+					<jsp:param value="address" name="tag" />
+				</jsp:include>
 			</div>
 			<!-- /左边 -->
 
@@ -36,28 +36,19 @@
 						<thead>
 							<tr class="text-center">
 								<td style="width: 80px">收件人</td>
-								<td style="width: 110px">电话</td>
 								<td>详情地址</td>
 								<td style="width: 70px">邮编</td>
-								<td style="width: 80px">默认地址</td>
-								<td style="width: 170px">操作</td>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${list}" var="address">
 								<tr class="text-center">
 									<td>${address.address}</td>
+									<td class="text-left">${address.state}</td>
 									<td class="text-left">${address.address}</td>
 									<td class="text-left">${address.post_code}</td>
-									<%--<td>${address.zipcode}</td>--%>
-									<%--<td>${address.default_value ? "是" : "否"}</td>--%>
-									<%--<td><a--%>
-										<%--href="${ctx}/member/address/default?id=${address.id}"--%>
-										<%--${address.default_value ? 'class="disabled"' : ""}>设为默认</a>&nbsp;&nbsp;--%>
 										<a href="${ctx}/member/address/update?id=${address.id}"
-										class="editHref">编辑</a>&nbsp;&nbsp; <a
-										href="${ctx}/member/address/delete?id=${address.id}"
-										class="deleteHref">删除</a></td>
+										class="editHref">编辑</a>&nbsp;
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -74,7 +65,7 @@
 	<!-- 新增地址的对话框 -->
 	<div class="modal fade" id="addAddressModal">
 		<div class="modal-dialog">
-			<form action="${ctx}/member/address/add" method="post"
+			<form action="${ctx}/user/address/add" method="post"
 				id="addressForm" class="form-horizontal">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -87,38 +78,22 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">收货人</label>
 							<div class="col-xs-4 required">
-								<input type="text" name="contact" id="contact"
+								<input type="text" name="contact_name" id="contact_name"
 									placeholder="收货人姓名" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label">电话</label>
-							<div class="col-xs-4 required">
-								<input type="text" name="mobile" id="mobile" placeholder="手机号"
-									class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">地址</label>
 							<div class="col-xs-9 required">
-								<input type="text" name="street" id="street" placeholder="详细地址"
+								<input type="text" name="address" id="address" placeholder="详细地址"
 									class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">邮编</label>
 							<div class="col-xs-4 required">
-								<input type="text" name="zipcode" id="zipcode"
+								<input type="text" name="post_code" id="post_code"
 									placeholder="邮政编码" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label">默认地址</label>
-							<div class="col-xs-4">
-								<label class="radio-inline"><input type="radio"
-									name="default_value" value="true" checked="checked" /> 是 </label> <label
-									class="radio-inline"><input type="radio"
-									name="default_value" value="false" /> 否 </label>
 							</div>
 						</div>
 					</div>
@@ -149,38 +124,22 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">收货人</label>
 							<div class="col-xs-4 required">
-								<input type="text" name="contact" id="contact"
+								<input type="text" name="contact_name" id="contact_name"
 									placeholder="收货人姓名" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label">电话</label>
-							<div class="col-xs-4 required">
-								<input type="text" name="mobile" id="mobile" placeholder="手机号"
-									class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">地址</label>
 							<div class="col-xs-9 required">
-								<input type="text" name="street" id="street" placeholder="详细地址"
+								<input type="text" name="address" id="address" placeholder="详细地址"
 									class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">邮编</label>
 							<div class="col-xs-4 required">
-								<input type="text" name="zipcode" id="zipcode"
+								<input type="text" name="post_code" id="post_code"
 									placeholder="邮政编码" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-xs-2 control-label">默认地址</label>
-							<div class="col-xs-4">
-								<label class="radio-inline"><input type="radio"
-									name="default_value" value="true" /> 是 </label> <label
-									class="radio-inline"><input type="radio"
-									name="default_value" value="false" /> 否 </label>
 							</div>
 						</div>
 					</div>
@@ -195,25 +154,6 @@
 	</div>
 	<!-- /编辑地址的对话框 -->
 
-	<!-- 删除的提示对话框 -->
-	<div class="modal fade" id="deleteModal">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">×</span><span class="sr-only">关闭</span>
-					</button>
-					<h4 class="modal-title">不可恢复删除，你确定吗？</h4>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" id="doDelete" class="btn btn-primary"
-						style="min-width: 80px">确定</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /删除的提示对话框  -->
 
 
 	<script src="${ctx}/zui/lib/jquery/jquery.js"></script>

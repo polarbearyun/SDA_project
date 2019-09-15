@@ -29,54 +29,35 @@
 						<strong><i class="icon-user"></i> 修改资料</strong>
 					</div>
 					<div class="panel-body">
-						<form action="${ctx}/member/profile" method="post"
+						<form action="${ctx}/user/edit" method="post"
 							id="profileForm" role="form" class="form-horizontal">
 							<div class="form-group">
 								<label class="col-xs-2 control-label">当前会员</label>
-								<div class="col-xs-4">${sessionScope.curr_mbr.mobile}</div>
+								<div class="col-xs-4">${sessionScope.curr_mbr.email}</div>
 							</div>
 							<div class="form-group">
-								<label class="col-xs-2 control-label">昵称</label>
+								<label class="col-xs-2 control-label">Name</label>
 								<div class="col-xs-4 required">
-									<input type="text" name="nick_name" id="nick_name"
-										value="${sessionScope.curr_mbr.nick_name}"
+									<input type="text" name="name" id="name"
+										value="${sessionScope.curr_mbr.name}"
 										class="form-control">
 								</div>
 							</div>
+
+
 							<div class="form-group">
-								<label class="col-xs-2 control-label">真实姓名</label>
+								<label class="col-xs-2 control-label">Phone</label>
 								<div class="col-xs-4 required">
-									<input type="text" name="real_name" id="real_name"
-										value="${sessionScope.curr_mbr.real_name}"
-										class="form-control">
+									<input type="text" name="phone" id="phone"
+										   value="${sessionScope.curr_mbr.phone}" class="form-control" />
 								</div>
 							</div>
+
 							<div class="form-group">
-								<label class="col-xs-2 control-label">性别</label>
-								<div class="col-md-4">
-									<c:if test="${sessionScope.curr_mbr.gender}">
-										<label class="radio-inline"> <input type="radio"
-											name="gender" value="true" checked="checked"> 男
-										</label>
-										<label class="radio-inline"> <input type="radio"
-											name="gender" value="false"> 女
-										</label>
-									</c:if>
-									<c:if test="${!sessionScope.curr_mbr.gender}">
-										<label class="radio-inline"> <input type="radio"
-											name="gender" value="true"> 男
-										</label>
-										<label class="radio-inline"> <input type="radio"
-											name="gender" value="false" checked="checked"> 女
-										</label>
-									</c:if>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-xs-2 control-label">邮箱号</label>
+								<label class="col-xs-2 control-label">Password</label>
 								<div class="col-xs-4 required">
-									<input type="text" name="email" id="email"
-										value="${sessionScope.curr_mbr.email}" class="form-control" />
+									<input type="password" name="password" id="password"
+										   value="${sessionScope.curr_mbr.password}" class="form-control" />
 								</div>
 							</div>
 
@@ -98,7 +79,7 @@
 	</div>
 	<!-- /主内容 -->
 
-	<jsp:include page="/icd_bottom.jsp"></jsp:include>
+	<%--<jsp:include page="/icd_bottom.jsp"></jsp:include>--%>
 
 	<script src="${ctx}/zui/lib/jquery/jquery.js"></script>
 	<script src="${ctx}/js/jquery.scrollUp.min.js"></script>

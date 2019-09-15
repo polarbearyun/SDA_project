@@ -16,7 +16,7 @@
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
-<%--<jsp:include page="/icd_top.jsp"></jsp:include>--%>
+<jsp:include page="/icd_top.jsp"></jsp:include>
 
 <!-- 主内容 -->
 <div class="wrapper" style="min-height: 500px;">
@@ -24,21 +24,18 @@
         <div class="panel-heading" style="font-size: 18px">
             <strong>结算</strong>
         </div>
-        <form action="${ctx}/payment" method="post">
+        <form action="${ctx}/pay" method="post">
             <div class="panel-body">
                 <div id="addressBox">
                     <div id="addressTitle">
-                        <strong>收货地址</strong> <a href="${ctx}/member/address/list">添加新地址</a>
+                        <strong>收货地址</strong> <a href="${ctx}/user/address/list">添加新地址</a>
                     </div>
                     <div id="addressList">
                         <c:forEach items="${addressList}" var="ad">
                             <div class="item">
-									<span> <input type="radio"
-                                        ${ad.default_value ? 'checked="checked"' : ""}
-                                                  name="address_id" value="${ad.id}" />
-									</span> <strong>${ad.contact}</strong> <span>${ad.mobile}</span> <span
-                                    class="text-muted">${ad.street}</span> <span
-                                    class="text-muted">${ad.zipcode}</span>
+                                <strong>${ad.address}</strong>
+                                <span class="text-muted">${ad.state}</span>
+                                <span class="text-muted">${ad.post_code}</span>
                             </div>
                         </c:forEach>
                     </div>
@@ -53,9 +50,9 @@
                 </div>
             </div>
             <div class="panel-footer text-right">
-                选择了 <strong class="text-danger">${curr_order.total_amount}</strong>
+                选择了 <strong class="text-danger">${current_order.number}</strong>
                 件商品， 共计：<strong class="text-danger"><fmt:formatNumber
-                    value="${curr_order.total_price}" pattern="￥#,##0.00" /> </strong> <input
+                    value="${current_order.total_price}" pattern="￥#,##0.00" /> </strong> <input
                     type="submit" id="submit" class="btn btn-primary" value="去支付" />
             </div>
         </form>

@@ -10,6 +10,8 @@ public class Address extends DomainObject {
 
     private User user;
 
+
+
     public Address (){
 
     }
@@ -53,5 +55,13 @@ public class Address extends DomainObject {
 
     public void setPost_code(String post_code) {
         this.post_code = post_code;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

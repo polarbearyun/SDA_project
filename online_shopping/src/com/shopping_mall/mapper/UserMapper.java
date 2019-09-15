@@ -19,19 +19,18 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String createUser = "INSERT INTO USER "
-                + "(id,email,name,phone,password,type)"
-                + "VALUES (?,?,?,?,?,?)";
+        String createUser = "INSERT INTO member "
+                + "(email, name, password, type, phone)"
+                + "VALUES (?,?,?,?,?)";
 
         PreparedStatement stmt = DBConnection.prepare(createUser);
 
         try {
-            stmt.setInt(1, user.getId());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getName());
-            stmt.setString(4, user.getPhone());
-            stmt.setString(5, user.getPassword());
-            stmt.setInt(6, user.getType());
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getName());
+            stmt.setString(3, user.getPassword());
+            stmt.setInt(4, user.getType());
+            stmt.setString(5, user.getPhone());
             stmt.execute();
             System.out.println(stmt.toString());
 
@@ -47,7 +46,7 @@ public class UserMapper implements DataMapper{
     }
 
 
-    public void update(DomainObject obj) throws SQLException {
+    public void update(DomainObject obj) {
 
         assert !(obj instanceof User) : "obj is not a user object";
         User user = (User)obj;
@@ -55,25 +54,30 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String updateUser = "UPDATE USER SET email='" + user.getEmail() +
-                "', + name='" + user.getName() +
-                "', + phone='" + user.getPhone() +
-                "', + password='" + user.getPassword() +
-                "', + type='" + user.getType() +
-                "' WHERE id='" + user.getId() + "'";
 
-        PreparedStatement stmt = DBConnection.prepare(updateUser);
+        String updateUserString = "UPDATE member SET "+
+                "email=?, name=?, password=?, type=?, phone=?  WHERE id =" + user.getId();
+        PreparedStatement updateStatement = DBConnection.prepare(updateUserString);
 
         try {
-            stmt.execute();
-            DBConnection.close(stmt);
+            updateStatement.setString(1,user.getEmail());
+            updateStatement.setString(2,user.getName());
+            updateStatement.setString(3,user.getPassword());
+            updateStatement.setInt(4,user.getType());
+            updateStatement.setString(5,user.getPhone());
+            updateStatement.execute();
+            System.out.println(updateStatement.toString());
+
+            DBConnection.close(updateStatement);
 
         } catch (SQLException e) {
-            System.out.println("Error!");
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         userIdentityMap.put(user.getId(), user);
+
+
     }
 
 

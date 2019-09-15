@@ -20,19 +20,13 @@ public class UserService {
 
     public void createUser(User user) throws Exception {
 
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerNew(user);
-        UnitOfWork.getCurrent().commit();
+        userMapper.insert(user);
 
     }
 
-//    public void updateUser(User user) throws Exception {
-//
-//        UnitOfWork.newCurrent();
-//        UnitOfWork.getCurrent().registerDirty(user);
-//        UnitOfWork.getCurrent().commit();
-//
-//    }
+    public void updateUser(User user) {
+        userMapper.update(user);
+    }
 //
 //    public void deleteUser(User user) throws Exception {
 //

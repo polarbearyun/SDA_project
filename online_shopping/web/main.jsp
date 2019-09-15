@@ -17,9 +17,9 @@
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
-<%--<jsp:include page="/icd_top.jsp">--%>
-    <%--<jsp:param value="index" name="tag" />--%>
-<%--</jsp:include>--%>
+<jsp:include page="/icd_top.jsp">
+    <jsp:param value="index" name="tag" />
+</jsp:include>
 
 
 <!-- 商品列表 -->

@@ -16,11 +16,9 @@ public class AddressService {
 
     }
 
-    public void createAddress(Address address) throws Exception {
+    public void createAddress(Address address){
 
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerNew(address);
-        UnitOfWork.getCurrent().commit();
+        addressMapper.insert(address);
 
     }
 

@@ -43,10 +43,9 @@ public class UserRegisterServlet extends HttpServlet {
         newUser.setEmail(email);
         newUser.setName(name);
         newUser.setPhone(phone);
-        if (password == passwordConfirm)
-            newUser.setPassword(password);
-        else
-            request.setAttribute("add", "Two password are not same!");
+        newUser.setPassword(password);
+
+
         newUser.setType(0);
 
         //business logic
@@ -62,7 +61,6 @@ public class UserRegisterServlet extends HttpServlet {
 
         // Judge whether this email exists or not
         if(user != null){
-
             request.setAttribute("msg", "Register failed! This email has already existed!");
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         }else{

@@ -17,12 +17,12 @@
 
 		<div class="row" style="padding: 20px 0px;">
 			<!-- /左边 -->
-			<%--<div class="col-xs-2">--%>
-				<%--&lt;%&ndash; JSP中的include中page路径里/代表的是项目的根目录 &ndash;%&gt;--%>
-				<%--<jsp:include page="/member/icd_menu.jsp">--%>
-					<%--<jsp:param value="index" name="tag" />--%>
-				<%--</jsp:include>--%>
-			<%--</div>--%>
+			<div class="col-xs-2">
+				<%-- JSP中的include中page路径里/代表的是项目的根目录 --%>
+				<jsp:include page="/user/icd_menu.jsp">
+					<jsp:param value="index" name="tag" />
+				</jsp:include>
+			</div>
 			<!-- /左边 -->
 
 			<!-- 右边 -->

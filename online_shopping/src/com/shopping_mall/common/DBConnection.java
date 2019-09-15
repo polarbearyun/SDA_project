@@ -6,11 +6,11 @@ public class DBConnection {
 
     static final String JDBC_DRIVER = "org.postgresql.Driver";
     //static final String DB_URL = "jdbc:postgresql://ec2-50-17-194-129.compute-1.amazonaws.com:5432/d8ai6gphpuhcgm?sslmode=require";
-    private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/shop";
+    private static final String DB_CONNECTION = "jdbc:postgresql://ec2-46-137-188-105.eu-west-1.compute.amazonaws.com:5432/d8uq1unod7pmik";
 
     // Database credentials
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "123";
+    private static final String DB_USER = "peqvffpltqokuz";
+    private static final String DB_PASSWORD = "eda999a8e9a85aa8de1e78a0838b4a9dc9f94a2266a4e5c76e8405e38b1e2630";
 
     static Connection dbConnection = null;
 

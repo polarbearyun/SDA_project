@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet("/user/orders")
-public class OrderListServlet extends HttpServlet {
+public class ViewOrderListServlet extends HttpServlet {
 	private static final long serialVersionUID = 2964566478709855605L;
 	private OrderService ordersService = new OrderService();
 

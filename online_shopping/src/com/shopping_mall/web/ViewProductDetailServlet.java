@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/product_detail")
-public class ProductDetailServlet extends HttpServlet {
+public class ViewProductDetailServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**

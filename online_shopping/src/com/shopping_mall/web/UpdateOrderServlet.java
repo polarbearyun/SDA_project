@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet("/pay")
-public class PayServlet extends HttpServlet {
+public class UpdateOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static OrderService orderService;
 	/**

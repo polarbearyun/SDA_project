@@ -47,7 +47,7 @@
                                     type="hidden" name="id" value="${entry.key.id}" /></td>
                             <td style="width: 100px">
                                 <div id="price">
-                                    <fmt:formatNumber value="${entry.key.price}"
+                                    <fmt:formatNumber value="${entry.key.price.price}"
                                                       pattern="#0.00" />
                                 </div>
                             </td>
@@ -62,7 +62,7 @@
                             </td>
                             <td style="width: 160px" class="text-center text-middle">
                                 <strong class="text-danger" id="sum"><fmt:formatNumber
-                                        value="${entry.key.price * entry.value}"
+                                        value="${entry.key.price.price * entry.value}"
                                         pattern="#0.00" /></strong>
                             </td>
                             <td style="width: 120px" class="text-middle text-center">

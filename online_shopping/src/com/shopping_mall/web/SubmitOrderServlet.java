@@ -51,7 +51,7 @@ public class SubmitOrderServlet extends HttpServlet {
 
 
             int number = amount;
-            int item_total_price = product.getPrice() * number;
+            int item_total_price = product.getPrice().getPrice() * number;
             item.setTotal_price(item_total_price);
 
             items.add(item);//

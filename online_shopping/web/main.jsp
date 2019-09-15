@@ -36,7 +36,7 @@
                         </a>
                         <div class="card-heading">
 								<span class="pull-right price"><fmt:formatNumber
-                                        value="${h.price}" pattern="￥#,##0.00" /> </span> <a
+                                        value="${h.price.price}" pattern="￥#,##0.00" /> </span> <a
                                 href="${ctx}/product_detail?id=${h.id}" target="_blank">${h.name}</a>
                         </div>
                     </div>

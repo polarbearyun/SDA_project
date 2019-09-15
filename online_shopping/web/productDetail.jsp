@@ -40,7 +40,7 @@
                             <ul class="list-unstyled">
                                 <li><span class="attr-name">Price</span> <span
                                         class="attr-value">$<del>
-												<strong><fmt:formatNumber value="${product.price}"
+												<strong><fmt:formatNumber value="${product.price.price}"
                                                                           pattern="#,##0.00" /></strong>
 											</del></span></li>
                                 <li><span class="attr-name">Status</span> <span

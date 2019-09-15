@@ -5,7 +5,6 @@ public class DBConnection {
     // JDBC driver name and database URL
 
     static final String JDBC_DRIVER = "org.postgresql.Driver";
-    //static final String DB_URL = "jdbc:postgresql://ec2-50-17-194-129.compute-1.amazonaws.com:5432/d8ai6gphpuhcgm?sslmode=require";
     private static final String DB_CONNECTION = "jdbc:postgresql://ec2-46-137-188-105.eu-west-1.compute.amazonaws.com:5432/d8uq1unod7pmik";
 
     // Database credentials

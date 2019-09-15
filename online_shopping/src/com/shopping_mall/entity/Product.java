@@ -10,9 +10,10 @@ public class Product extends DomainObject{
 
     private Integer sold_number;
 
-    private Integer price;
+    private Price price;
 
     private String detail;
+
 
 
     public Product() {
@@ -20,7 +21,7 @@ public class Product extends DomainObject{
     }
 
     public Product(int productId, String name, String picture, Integer inventory, Integer sold_number,
-                Integer price, String detail) {
+                   Price price, String detail) {
         super();
         this.id = productId;
         this.name = name;
@@ -72,11 +73,11 @@ public class Product extends DomainObject{
         this.sold_number = sold_number;
     }
 
-    public Integer getPrice() {
+    public Price getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Price price) {
         this.price = price;
     }
 

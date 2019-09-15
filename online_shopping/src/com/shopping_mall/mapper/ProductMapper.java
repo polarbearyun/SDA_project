@@ -3,6 +3,7 @@ package com.shopping_mall.mapper;
 import com.shopping_mall.common.DBConnection;
 import com.shopping_mall.common.IdentityMap;
 import com.shopping_mall.entity.DomainObject;
+import com.shopping_mall.entity.Price;
 import com.shopping_mall.entity.Product;
 import org.apache.commons.dbutils.DbUtils;
 
@@ -36,7 +37,7 @@ public class ProductMapper implements DataMapper {
             createStatement.setString(3, product.getPicture());
             createStatement.setInt(4, product.getInventory());
             createStatement.setInt(5, product.getSold_number());
-            createStatement.setFloat(6, product.getPrice());
+            createStatement.setFloat(6, product.getPrice().getPrice());
             createStatement.setString(7, product.getDetail());
             createStatement.execute();
             System.out.println(createStatement.toString());
@@ -69,7 +70,7 @@ public class ProductMapper implements DataMapper {
             updateStatement.setString(2, product.getPicture());
             updateStatement.setInt(3, product.getInventory());
             updateStatement.setInt(4, product.getSold_number());
-            updateStatement.setFloat(5, product.getPrice());
+            updateStatement.setFloat(5, product.getPrice().getPrice());
             updateStatement.setString(6, product.getDetail());
 
             updateStatement.execute();
@@ -191,7 +192,8 @@ public class ProductMapper implements DataMapper {
             String picture = rs.getString("picture");
             Integer inventory = Integer.valueOf(rs.getString("inventory"));
             Integer sold_number = Integer.valueOf(rs.getString("sold_number"));
-            Integer price =  Integer.valueOf(rs.getString("price"));
+            Integer price_int =  Integer.valueOf(rs.getString("price"));
+            Price price = new Price(price_int);
             String detail =  rs.getString("detail");
 
             product = new Product(productId, name, picture, inventory, sold_number, price, detail);

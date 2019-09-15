@@ -40,12 +40,11 @@ public class SubmitOrderServlet extends HttpServlet {
         for(int i = 0; i < length; i++){
             Integer id = Integer.valueOf(idStrs[i]);
             int amount = Integer.parseInt(amountStrs[i]);
-            allAmount += amount; //计算购物的总数量
+            allAmount += amount;
 
-            //效率有点低
+
             Product product = service.findById(id);
 
-            //把购物车中的每个商品都转换成一个订单项对象
             Item item = new Item();
             item.setAmount(amount);
             item.setProduct_id(id);
@@ -57,35 +56,30 @@ public class SubmitOrderServlet extends HttpServlet {
 
             items.add(item);//
 
-            total_price = total_price + item_total_price; //计算总金额
+            total_price = total_price + item_total_price;
 
-            //改购物车中的相应商品的数量
-            @SuppressWarnings("unchecked")
+
             Map<Product, Integer> cart = (Map<Product, Integer>)session.getAttribute("cart");
             cart.put(product, Integer.valueOf(amount));
         }
 
-        //订单实体类
         Order order = new Order();
-        order.setItem(items); //订单的每个订单项
-        //order.setTotal_amount(allAmount); //订单的总物品数量
-        order.setTotal_price(total_price);//订单的总金额
-       // order.setPayment_price(allPaymentPrice); //订单的实际支付金额
+        order.setItem(items);
+
+        order.setTotal_price(total_price);
         order.setCreate_time(new Date());
 
-        //把当前订单数据存储到session中
         session.setAttribute("current_order", order);
 
 
 
-        //判断用户有没有登录
         User user = (User)session.getAttribute("curr_mbr");
-        if(user == null){ //没有登录，就跳转到登录页面
+        if(user == null){
 
-            request.setAttribute("msg", "提交订单前,请先登录!");
+            request.setAttribute("msg", "Please Login First!");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
 
-        }else{//登录后的，跳转结算页面
+        }else{
             AddressService addressService = new AddressService();
             List<Address> addressList = addressService.viewAllAddressOfUser(user.getId());
             request.setAttribute("addressList", addressList);

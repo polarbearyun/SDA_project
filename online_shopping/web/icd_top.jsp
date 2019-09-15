@@ -1,7 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div id="top">
-	<!-- 工具条 -->
 	<div id="toolbar">
 		<div class="wrapper row">
 			<c:if test="${!empty sessionScope.curr_mbr}" var="flag">
@@ -9,8 +8,9 @@
 					${sessionScope.curr_mbr.name}！</div>
 				<div class="col-xs-4"></div>
 				<div class="col-xs-3" style="text-align: right;">
-					<a href="${ctx}/user/orders">Member</a> <a
-						href="${ctx}/logout">Logout</a>
+					<a href="${ctx}/cart.jsp" class="btn btn-primary"style="width: 120px; height: 40px; line-height: 30px;"> <i class="icon icon-shopping-cart"></i> Cart</a>
+					<a href="${ctx}/user/orders">Member</a>
+					<a href="${ctx}/logout">Logout</a>
 				</div>
 			</c:if>
 			<c:if test="${!flag}">

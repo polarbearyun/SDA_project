@@ -66,7 +66,7 @@
                                         pattern="#0.00" /></strong>
                             </td>
                             <td style="width: 120px" class="text-middle text-center">
-                                <a href="${ctx}/removeFromCart?id=${entry.key.id}"
+                                <a href="${ctx}/removeItem?id=${entry.key.id}"
                                    class="deleter">Delete</a>
                             </td>
                         </tr>

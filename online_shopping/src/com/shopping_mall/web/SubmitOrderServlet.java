@@ -27,7 +27,6 @@ public class SubmitOrderServlet extends HttpServlet {
         String[] idStrs = request.getParameterValues("id");
         String[] amountStrs = request.getParameterValues("amount");
 
-
         HttpSession session = request.getSession();
         ProductService service = new ProductService();
 
@@ -85,6 +84,7 @@ public class SubmitOrderServlet extends HttpServlet {
 
             request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);
         }
+
     }
 
     /**

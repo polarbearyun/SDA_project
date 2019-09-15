@@ -30,12 +30,6 @@
                         </div>
                         <div class="panel-body">
                             <form action="${ctx}/login" method="post">
-                                <c:if test="${!empty msg}">
-                                    <div class="form-group">
-                                        <div id="formError" class="alert alert-danger">${msg}</div>
-                                    </div>
-                                    <c:remove var="msg" />
-                                </c:if>
                                 <div class="form-group">
                                     <input type="text" name="email" id="email" value=""
                                            placeholder="Email" class="form-control input-lg">

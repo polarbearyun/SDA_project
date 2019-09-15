@@ -66,7 +66,7 @@ public class UserLoginServlet extends HttpServlet {
 
                     request.setAttribute("addressList", addressList);
 
-                    request.getRequestDispatcher("/orders.jsp").forward(request, response);;
+                    request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);;
                 }else{
                     response.sendRedirect(request.getContextPath() + "/main");
                 }

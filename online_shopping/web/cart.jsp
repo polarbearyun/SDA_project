@@ -12,28 +12,27 @@
 <html lang="zh-cn">
 <head>
     <jsp:include page="/icd_meta.jsp" />
-    <title>购物车</title>
+    <title>Cart</title>
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
 <jsp:include page="/icd_top.jsp"></jsp:include>
 
-<!-- 主内容 -->
 <div class="wrapper" style="min-height: 500px;">
     <div class="panel" style="margin-top: 20px">
         <div class="panel-heading" style="font-size: 18px">
-            <strong>我的购物车</strong>
+            <strong>My cart</strong>
         </div>
         <form action="${ctx}/submit_order" method="post">
             <div class="panel-body">
                 <table class="table">
                     <thead>
                     <tr class="text-center">
-                        <td colspan="2" class="text-left">商品信息</td>
-                        <td class="text-left">价格</td>
-                        <td>数量</td>
-                        <td>金额</td>
-                        <td>操作</td>
+                        <td colspan="2" class="text-left">Product</td>
+                        <td class="text-left">Price</td>
+                        <td>Amount</td>
+                        <td>Price</td>
+                        <td>Method</td>
                     </tr>
                     </thead>
                     <tbody id="cart-list">
@@ -68,25 +67,22 @@
                             </td>
                             <td style="width: 120px" class="text-middle text-center">
                                 <a href="${ctx}/removeFromCart?id=${entry.key.id}"
-                                   class="deleter">删除</a>
+                                   class="deleter">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
                 <div class="panel-footer text-right">
-                    选择了 <strong class="text-danger" id="amount-sum"></strong> 件商品， 共计：<strong
+                    Chosen <strong class="text-danger" id="amount-sum"></strong> Items， Total：<strong
                         id="price-sum" class="text-danger"></strong> <input type="submit"
-                                                                            id="submit" class="btn btn-primary" value="去结算"
-                                                                            data-loading="稍候..." />
+                                                                            id="submit" class="btn btn-primary" value="Pay"
+                                                                            data-loading="Wait..." />
                 </div>
             </div>
         </form>
     </div>
 </div>
-<!-- /主内容 -->
-
-<%--<jsp:include page="/icd_bottom.jsp"></jsp:include>--%>
 
 <script src="${ctx}/zui/lib/jquery/jquery.js"></script>
 <script src="${ctx}/js/jquery.scrollUp.min.js"></script>

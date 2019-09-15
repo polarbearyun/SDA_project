@@ -13,7 +13,7 @@
 <html lang="zh-cn">
 <head>
     <jsp:include page="/icd_meta.jsp" />
-    <title>电器城-首页</title>
+    <title>HomePage</title>
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
@@ -22,7 +22,7 @@
 </jsp:include>
 
 
-<!-- 商品列表 -->
+<!-- Product List -->
 <div class="wrapper">
 
     <div class="list">
@@ -46,29 +46,6 @@
     </div>
 </div>
 
-<!-- /商品列表 -->
-
-<!-- 添加到购物车的对话框 -->
-<div class="modal fade" id="addToCartModal">
-    <div class="modal-dialog modal-sm">
-        <form action="./profile" method="post" class="form-horizontal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">×</span><span class="sr-only">关闭</span>
-                    </button>
-                    <h4 class="modal-title">商品成功加入购物车</h4>
-                </div>
-                <div class="modal-footer">
-                    <a href="${ctx}/main" class="btn btn-primary">继续购物</a> <a
-                        href="${ctx}/cart.jsp" class="btn btn-primary"
-                        style="min-width: 80px">立即结算</a>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- /添加到购物车 -->
 
 <script src="${ctx}/zui/lib/jquery/jquery.js"></script>
 <script src="${ctx}/js/jquery/scrollUp/min.js"></script>

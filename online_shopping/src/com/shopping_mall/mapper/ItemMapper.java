@@ -18,7 +18,7 @@ public class ItemMapper implements DataMapper {
         assert !(obj instanceof Item) : "obj is not a item object";
         Item item = (Item) obj;
 
-        Item targetItem = new Item();
+        //Item targetItem = new Item();
         //IdentityMap<Item> itemMap = IdentityMap.getInstance(targetItem);
 
         String createItemString = "INSERT INTO item" + "( order_id, product_id, amount, total_price)" +"VALUES ( ?, ?, ?, ?)";
@@ -46,29 +46,7 @@ public class ItemMapper implements DataMapper {
     public void update(DomainObject obj) {
         // TODO Auto-generated method stub
         assert !(obj instanceof Item) : "obj is not a item object";
-//        Item item = (Item) obj;
-//
-//        Item targetItem = new Item();
-//        IdentityMap<Item> itemMap = IdentityMap.getInstance(targetItem);
-//
-//        String updateOrderString = "UPDATE ITEM SET AMOUNT = ? "
-//                + "WHERE ORDERID = " + item.getOrderId();
-//
-//        PreparedStatement updateStatement = DBConnection.prepare(updateOrderString);
-//
-//        try {
-//            updateStatement.setInt(1, item.getId());
-//            updateStatement.execute();
-//            System.out.println(updateStatement.toString());
-//
-//            DBConnection.close(updateStatement);
-//
-//        } catch (SQLException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//
-//        itemMap.put(item.getId(), item);
+
     }
 
 
@@ -80,17 +58,14 @@ public class ItemMapper implements DataMapper {
         Item targetItem = new Item();
         IdentityMap<Item> orderMap = IdentityMap.getInstance(targetItem);
 
-        String deleteOrderString = "DELETE FROM public.item"
+        String deleteOrderString = "DELETE FROM item"
                 + "WHERE id = " + item.getId();
 
         PreparedStatement deleteStatement = DBConnection.prepare(deleteOrderString);
-
         try {
             deleteStatement.execute();
             System.out.println(deleteStatement.toString());
-
             DBConnection.close(deleteStatement);
-
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -109,13 +84,10 @@ public class ItemMapper implements DataMapper {
 
         PreparedStatement stmt = DBConnection.prepare(findOrdersByUserId);
         ArrayList<Item> itemList = new ArrayList<Item>();
-
         try {
             ResultSet rs = stmt.executeQuery();
-
             while(rs.next()) {
                 item = load(rs);
-
                 targetItem = itemIdentityMap.get(item.getId());
                 if (targetItem == null) {
                     itemList.add(item);
@@ -126,7 +98,6 @@ public class ItemMapper implements DataMapper {
             }
             DBConnection.close(stmt);
             rs.close();
-
         } catch (SQLException e) {
             System.out.println("Exception!");
             e.printStackTrace();
@@ -134,10 +105,7 @@ public class ItemMapper implements DataMapper {
         return itemList;
     }
 
-
-
     public static Item load(ResultSet rs) {
-
         Item item = null;
         try {
             int itemId = rs.getInt("id");
@@ -145,16 +113,10 @@ public class ItemMapper implements DataMapper {
             int order = rs.getInt("order_id");
             int product  = rs.getInt("product_id");
             int total_price = rs.getInt("total_price");
-
             item = new Item(itemId, amount, order, product, total_price);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return item;
     }
-
-
-
-
 }

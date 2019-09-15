@@ -14,15 +14,9 @@ public class AddressMapper implements DataMapper {
     public void insert(DomainObject obj) {
         assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address)obj;
-
-        Address addr = new Address();
-        //IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
-
         String createAddress = "INSERT INTO address "
                 + "(address, contact_name, post_code, user_id)"
                 + "VALUES (?,?,?,?)";
-
-
         PreparedStatement stmt = DBConnection.prepare(createAddress);
 
         try {
@@ -39,7 +33,6 @@ public class AddressMapper implements DataMapper {
             System.out.println("Database Operation Error!");
             e.printStackTrace();
         }
-       // addressIdentityMap.put(address.getId(), address);
     }
 
 
@@ -52,7 +45,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String updateAddress = "UPDATE SHOP.ADDRESS SET address='" + address.getAddress() +
+        String updateAddress = "UPDATE address SET address='" + address.getAddress() +
                 "', + state='" + address.getState() +
                 //"', + user_id='" + address.getUser_id() +
                 "', + post_code='" + address.getPost_code() +
@@ -81,7 +74,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String deleteAddress = "DELETE * SHOP.ADDRESS WHERE "
+        String deleteAddress = "DELETE * address WHERE "
                 + "id = '" + address.getId() + "'";
 
         PreparedStatement stmt = DBConnection.prepare(deleteAddress);

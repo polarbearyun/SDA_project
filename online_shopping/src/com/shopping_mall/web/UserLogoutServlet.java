@@ -18,10 +18,8 @@ public class UserLogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 把当前用户的会话失效
         request.getSession().invalidate();
 
-        // 跳转到登录页面
         response.sendRedirect(request.getContextPath() + "/main");
     }
 

@@ -18,20 +18,15 @@ public class AddressListServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //
+
         User mbr = (User) request.getSession().getAttribute("curr_mbr");
 
-
-        //
         AddressService service = new AddressService();
         List<Address> list = service.viewAllAddressOfUser(mbr.getId());
 
-        //
         request.setAttribute("list", list);
         request.getRequestDispatcher("/user/address.jsp").forward(request, response);
     }
-
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

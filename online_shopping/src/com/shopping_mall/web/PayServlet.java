@@ -18,9 +18,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * 保存订单数据到数据库，并跳转到支付界面
- */
 @WebServlet("/pay")
 public class PayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,21 +42,15 @@ public class PayServlet extends HttpServlet {
 		order.setRemark(remark);
 		
 		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		order.setNumber(df.format(new Date())); //生成一个有意义订单编号
+		order.setNumber(df.format(new Date()));
 		order.setStatus(2);
 		order.setItemLoaded(true);
 
 
-		
-//		AddressService addressService = new AddressService();
-//		Address address = addressService.viewOneAddressById(Integer.valueOf(address_id));
-
-		
-		//保存订单
 		OrderService ordersService = new OrderService();
 		ordersService.save(order);
-		
-		//用户购物流程结束------>清除当前session中的购物车对象
+
+		//clean the cart
 		session.removeAttribute("cart");
 		
 		response.sendRedirect(request.getContextPath() + "/user/orders");

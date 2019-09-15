@@ -4,7 +4,6 @@ import com.shopping_mall.common.UnitOfWork;
 import com.shopping_mall.entity.Address;
 import com.shopping_mall.mapper.AddressMapper;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AddressService {
@@ -15,7 +14,6 @@ public class AddressService {
         addressMapper = new AddressMapper();
 
     }
-
     public void createAddress(Address address){
 
         addressMapper.insert(address);

@@ -1,9 +1,7 @@
 package com.shopping_mall.web;
 
-import com.shopping_mall.common.Page;
 import com.shopping_mall.entity.Product;
 import com.shopping_mall.mapper.ProductMapper;
-import com.shopping_mall.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
@@ -21,12 +19,9 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        //取一级类目“手机”下的商品列表，6条
         ProductMapper productMapper = new ProductMapper();
         ArrayList<Product> productList = productMapper.getAllProduct();
         request.setAttribute("products", productList);
-
 
         request.getRequestDispatcher("/main.jsp").forward(request, response);
     }

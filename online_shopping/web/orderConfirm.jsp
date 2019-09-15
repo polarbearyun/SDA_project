@@ -12,29 +12,28 @@
 <html lang="zh-cn">
 <head>
     <jsp:include page="/icd_meta.jsp" />
-    <title>结算</title>
+    <title>Confirm</title>
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
 <jsp:include page="/icd_top.jsp"></jsp:include>
 
-<!-- 主内容 -->
 <div class="wrapper" style="min-height: 500px;">
     <div class="panel" style="margin-top: 20px">
         <div class="panel-heading" style="font-size: 18px">
-            <strong>结算</strong>
+            <strong>Confirm</strong>
         </div>
         <form action="${ctx}/pay" method="post">
             <div class="panel-body">
                 <div id="addressBox">
                     <div id="addressTitle">
-                        <strong>收货地址</strong> <a href="${ctx}/user/address/list">添加新地址</a>
+                        <strong>Address</strong> <a href="${ctx}/user/address/list">Add Address if there is no address</a>
                     </div>
                     <div id="addressList">
                         <c:forEach items="${addressList}" var="ad">
                             <div class="item">
-                                <strong>${ad.address}</strong>
-                                <span class="text-muted">${ad.state}</span>
+                                <strong>${ad.state}</strong>
+                                <span class="text-muted">${ad.address}</span>
                                 <span class="text-muted">${ad.post_code}</span>
                             </div>
                         </c:forEach>
@@ -43,24 +42,21 @@
 
                 <br /> <br />
                 <div class="form-group">
-                    <label class="col-xs-1 control-label required">买家留言</label>
+                    <label class="col-xs-1 control-label required">Remark</label>
                     <div class="col-xs-11">
                         <input type="text" name="remark" id="remark" class="form-control" />
                     </div>
                 </div>
             </div>
             <div class="panel-footer text-right">
-                选择了 <strong class="text-danger">${current_order.number}</strong>
-                件商品， 共计：<strong class="text-danger"><fmt:formatNumber
-                    value="${current_order.total_price}" pattern="￥#,##0.00" /> </strong> <input
-                    type="submit" id="submit" class="btn btn-primary" value="去支付" />
+                Chosen <strong class="text-danger">${current_order.number}</strong>
+                Items, Total：<strong class="text-danger"><fmt:formatNumber
+                    value="${current_order.total_price}" pattern="$#,##0.00" /> </strong> <input
+                    type="submit" id="submit" class="btn btn-primary" value="Pay" />
             </div>
         </form>
     </div>
 </div>
-<!-- /主内容 -->
-
-<%--<jsp:include page="/icd_bottom.jsp"></jsp:include>--%>
 
 <script src="${ctx}/zui/lib/jquery/jquery.js"></script>
 <script src="${ctx}/js/jquery.scrollUp.min.js"></script>

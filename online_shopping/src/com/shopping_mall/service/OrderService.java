@@ -7,10 +7,8 @@ import com.shopping_mall.entity.Order;
 import com.shopping_mall.mapper.ItemMapper;
 import com.shopping_mall.mapper.OrderMapper;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class OrderService {
 

@@ -27,14 +27,6 @@ public class UserService {
     public void updateUser(User user) {
         userMapper.update(user);
     }
-//
-//    public void deleteUser(User user) throws Exception {
-//
-//        UnitOfWork.newCurrent();
-//        UnitOfWork.getCurrent().registerDeleted(user);
-//        UnitOfWork.getCurrent().commit();
-//
-//    }
 
 
     /**

@@ -9,7 +9,9 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
+    <jsp:include page="/icd_meta.jsp" />
     <title>Online shopping mall - Login</title>
+    <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
 

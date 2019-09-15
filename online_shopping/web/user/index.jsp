@@ -33,9 +33,7 @@
 								<td style="width: 80px">Amount</td>
 								<td style="width: 80px" class="text-right">Price</td>
 								<td style="width: 200px">Status</td>
-								<td style="width: 60px">Remark</td>
-								<td style="width: 100px"></td>
-								<td style="width: 120px"></td>
+								<td style="width: 280px">Remark</td>
 							</tr>
 						</thead>
 						<tbody>

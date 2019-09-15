@@ -23,11 +23,11 @@ public class SubmitOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //
+
         String[] idStrs = request.getParameterValues("id");
         String[] amountStrs = request.getParameterValues("amount");
 
-        //
+
         HttpSession session = request.getSession();
         ProductService service = new ProductService();
 
@@ -41,7 +41,6 @@ public class SubmitOrderServlet extends HttpServlet {
             Integer id = Integer.valueOf(idStrs[i]);
             int amount = Integer.parseInt(amountStrs[i]);
             allAmount += amount;
-
 
             Product product = service.findById(id);
 

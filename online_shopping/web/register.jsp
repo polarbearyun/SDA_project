@@ -6,7 +6,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <jsp:include page="/icd_meta.jsp" />
     <title>Online shopping mall - Register</title>
+    <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
 

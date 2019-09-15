@@ -31,8 +31,7 @@ public class UpdateOrderServlet extends HttpServlet {
 		//
 		String address_id = request.getParameter("address_id");
 		String remark = request.getParameter("remark");
-		
-		
+
 		HttpSession session = request.getSession();
 		Order order = (Order)session.getAttribute("current_order");
 		

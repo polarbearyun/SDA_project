@@ -54,7 +54,7 @@ public class OrderMapper implements DataMapper{
     }
 
 
-    public void update(DomainObject obj) throws SQLException {
+    public void update(DomainObject obj) {
 
         assert !(obj instanceof Order) : "obj is not an order object";
         Order order = (Order)obj;
@@ -80,7 +80,7 @@ public class OrderMapper implements DataMapper{
     }
 
 
-    public void delete(DomainObject obj) throws SQLException {
+    public void delete(DomainObject obj) {
 
         assert !(obj instanceof Order) : "obj is not an order object";
         Order order = (Order)obj;
@@ -105,59 +105,6 @@ public class OrderMapper implements DataMapper{
         orderIdentityMap.put(order.getId(), null);
     }
 
-
-//    /**
-//     * Find a user by the user name
-//     */
-//    public static Order findOrderByName(String username) throws SQLException {
-//
-//        ResultSet rs = null;
-//        Order targetOrder = new Order();
-//        IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
-//
-//        String findOrderByName = "SELECT p.name FROM ORDER as m,USER as p where m.user_id=p.id and p.name=" + username;
-//
-//        PreparedStatement findOrderByNameStatement = DBConnection.prepare(findOrderByName);
-//
-//        try {
-//            rs = findOrderByNameStatement.executeQuery();
-//            Order order = new Order();
-//            while(rs.next()) {
-//                order.setId(rs.getInt("id"));
-//                order.setEmail(rs.getString("email"));
-//                order.setName(rs.getString("name"));
-//                order.setPhone(rs.getInt("phone"));
-//                order.setPassword(rs.getString("password"));
-//                order.setType(rs.getInt("type"));
-//                break;
-//            }
-//            if(user != null) {
-//                targetUser = userIdentityMap.get(user.getId());
-//                if(targetUser == null) {
-//                    userIdentityMap.put(user.getId(), user);
-//                    return user;
-//                }
-//                else
-//                    return targetUser;
-//            }
-//
-//            return user;
-//
-//        } catch (Exception e) {
-//            System.out.println("Exception!");
-//            e.printStackTrace();
-//            return null;
-//        }finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println("Close Error!");//
-//                ex.printStackTrace();
-//            }
-//        }
-//    }
 
 
 

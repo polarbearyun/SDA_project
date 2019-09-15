@@ -31,7 +31,9 @@
             <c:forEach items="${products}" var="h">
                 <div class="col-xs-2">
                     <div class="card">
-                        <a href="${ctx}/product_detail?id=${h.id}" target="_blank">${h.name}</a>
+                        <a href="${ctx}/product_detail?id=${h.id}" target="_blank">
+                            <img src="${h.picture}" alt="">
+                        </a>
                         <div class="card-heading">
 								<span class="pull-right price"><fmt:formatNumber
                                         value="${h.price}" pattern="￥#,##0.00" /> </span> <a

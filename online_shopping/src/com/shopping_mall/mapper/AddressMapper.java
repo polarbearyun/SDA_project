@@ -73,7 +73,7 @@ public class AddressMapper implements DataMapper {
 
 
     // Find the address and delete one address of a user in the database
-    public void delete(DomainObject obj) throws SQLException {
+    public void delete(DomainObject obj) {
 
         assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address)obj;

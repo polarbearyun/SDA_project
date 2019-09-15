@@ -16,10 +16,14 @@ public class OrderService {
 
     private OrderMapper orderMapper;
     private ItemMapper itemMapper;
+    private ItemService itemService;
+    private UnitOfWork unitOfWork;
 
     public OrderService(){
         orderMapper = new OrderMapper();
         itemMapper = new ItemMapper();
+        itemService = new ItemService();
+        unitOfWork = new UnitOfWork();
 
     }
 
@@ -28,26 +32,29 @@ public class OrderService {
         order.setId(orderId);
         orderMapper.insert(order);
         //批量添加订单项
+
+
         List<Item> items = order.getItem();
         for(Item item : items){
             item.setOrder_id(orderId);
-            itemMapper.insert(item);
+            unitOfWork.registerNew(item);
+            //itemMapper.insert(item);
         }
+        unitOfWork.commit();
     }
 
     public void updateOrder(Order order) throws Exception {
 
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerDirty(order);
-        UnitOfWork.getCurrent().commit();
+
+        unitOfWork.registerDirty(order);
+        unitOfWork.commit();
 
     }
 
     public void deleteOrder(Order order) throws Exception {
 
-        UnitOfWork.newCurrent();
-        UnitOfWork.getCurrent().registerDeleted(order);
-        UnitOfWork.getCurrent().commit();
+        unitOfWork.registerDeleted(order);
+        unitOfWork.commit();
 
     }
 

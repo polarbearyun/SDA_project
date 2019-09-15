@@ -20,6 +20,16 @@
 
 
 
+<!-- 主内容 -->
+<div class="wrapper">
+    <%--<!-- 面包屑导航 -->--%>
+    <%--<ol class="breadcrumb">--%>
+        <%--<li><span class="breadcrumb-title">当前位置：</span> <a--%>
+                <%--href="${ctx}/main">首页</a></li>--%>
+        <%--<li class="active">${product.name}</li>--%>
+    <%--</ol>--%>
+    <%--<!-- /面包屑导航 -->--%>
+
     <!--  -->
     <div class="row">
         <!-- /左边 -->
@@ -29,7 +39,7 @@
                 <div class="row">
                     <div class="col-xs-4">
                         <div class="product-image">
-                            <img src="${pic_base}${product.picture}"
+                            <img src="${product.picture}"
                                  title="${product.name}" alt="${product.name}"
                                  style="max-height: 290px">
                         </div>

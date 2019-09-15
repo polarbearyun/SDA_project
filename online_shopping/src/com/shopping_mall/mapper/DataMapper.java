@@ -24,11 +24,11 @@ public interface DataMapper {
     }
 
     // Insert a new domainObject into database
-    public void insert(DomainObject obj) throws SQLException;
+    public void insert(DomainObject obj);
 
     // Update the information of a domainObject in database
-    public void update(DomainObject obj) throws SQLException;
+    public void update(DomainObject obj);
 
     // Delete a DomainObject in database
-    public void delete(DomainObject obj) throws SQLException;
+    public void delete(DomainObject obj);
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class UserMapper implements DataMapper{
 
-    public void insert(DomainObject obj) throws SQLException {
+    public void insert(DomainObject obj)  {
         assert !(obj instanceof User) : "obj is not a user object";
         User user = (User)obj;
 
@@ -81,7 +81,7 @@ public class UserMapper implements DataMapper{
     }
 
 
-    public void delete(DomainObject obj) throws SQLException {
+    public void delete(DomainObject obj)  {
 
         assert !(obj instanceof User) : "obj is not a user object";
         User user = (User)obj;
@@ -110,7 +110,7 @@ public class UserMapper implements DataMapper{
     /**
      * Find a user by the user name
      */
-    public static User findUserByName(String username) throws SQLException {
+    public static User findUserByName(String username) {
 
         User user = null;
         User targetUser = new User();
@@ -149,7 +149,7 @@ public class UserMapper implements DataMapper{
     /**
      * Find a user by the user's email
      */
-    public static User findUserByEmail(String email) throws SQLException {
+    public static User findUserByEmail(String email) {
 
         User user = null;
         User targetUser = new User();
@@ -188,7 +188,7 @@ public class UserMapper implements DataMapper{
     /**
      * Find all users in the database
      */
-    public static ArrayList<User> findAllUsers() throws SQLException {
+    public static ArrayList<User> findAllUsers() {
 
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);

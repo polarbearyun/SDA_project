@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Staff - Sakura Hotel</title>
+    <title>Sneaker Mall</title>
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-<%@include file="../naviBar.jsp"%>
+<%--<%@include file="../naviBar.jsp"%>--%>
 
 <div id="header-wrapper" style="width: 100%;
 	            height: 100%;

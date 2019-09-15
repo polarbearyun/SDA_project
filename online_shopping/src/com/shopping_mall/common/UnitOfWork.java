@@ -55,7 +55,7 @@ public class UnitOfWork {
     }
 
     // Commit the current unit of work
-    public void commit() throws Exception {
+    public void commit() {
         for (DomainObject obj : newObjects){
             DataMapper.getMapper(obj.getClass()).insert(obj);
         }

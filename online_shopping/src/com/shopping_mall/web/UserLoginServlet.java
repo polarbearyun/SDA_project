@@ -51,24 +51,31 @@ public class UserLoginServlet extends HttpServlet {
 
         // GOTO
         if(user != null){
-            if(user.getPassword().equals(password)){
+            if(user.getPassword().equals(password)) {
                 //login success
-                //record user data in this session
-                request.getSession().setAttribute("curr_mbr", user);
+                if (user.getType() == 0){
+
+                    //record user data in this session
+                    request.getSession().setAttribute("curr_mbr", user);
 
                 // If the user login when commit order, then goto /order.jsp
                 // If not, goto the user profile page after login
-                Order order = (Order)request.getSession().getAttribute("current_order");
-                if(order != null){
+                Order order = (Order) request.getSession().getAttribute("current_order");
+                if (order != null) {
                     AddressService addressService = new AddressService();
                     List<Address> addressList = null;
                     addressList = addressService.viewAllAddressOfUser(user.getId());
 
                     request.setAttribute("addressList", addressList);
 
-                    request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);;
-                }else{
+                    request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);
+                    ;
+                } else {
                     response.sendRedirect(request.getContextPath() + "/main");
+                }
+            }else {
+                    request.getSession().setAttribute("curr_mbr", user);
+                    response.sendRedirect(request.getContextPath() + "/admin/product");
                 }
 
             }else{

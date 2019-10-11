@@ -26,19 +26,18 @@ public class ProductMapper implements DataMapper {
         IdentityMap<Product> productMap = IdentityMap.getInstance(targetProduct);
 
         String createItemString = "INSERT INTO public.product"
-                + "(id, name, picture, inventory, sold_number, price, detail)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "(name, picture, inventory, sold_number, price, detail)"
+                + "VALUES ( ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement createStatement = DBConnection.prepare(createItemString);
 
         try {
-            createStatement.setInt(1, product.getId());
-            createStatement.setString(2, product.getName());
-            createStatement.setString(3, product.getPicture());
-            createStatement.setInt(4, product.getInventory());
-            createStatement.setInt(5, product.getSold_number());
-            createStatement.setFloat(6, product.getPrice().getPrice());
-            createStatement.setString(7, product.getDetail());
+            createStatement.setString(1, product.getName());
+            createStatement.setString(2, product.getPicture());
+            createStatement.setInt(3, product.getInventory());
+            createStatement.setInt(4, product.getSold_number());
+            createStatement.setFloat(5, product.getPrice().getPrice());
+            createStatement.setString(6, product.getDetail());
             createStatement.execute();
             System.out.println(createStatement.toString());
 
@@ -60,7 +59,7 @@ public class ProductMapper implements DataMapper {
         Product targetProduct = new Product();
         IdentityMap<Product> productMap = IdentityMap.getInstance(targetProduct);
 
-        String updateOrderString = "UPDATE public.product SET name=?, picture=?, inventory=?, sold_number=?, price=?, detail=?"
+        String updateOrderString = "UPDATE public.product SET name=?, picture=?, inventory=?,  price=?, detail=?"
                 + "WHERE id = " + product.getId();
 
         PreparedStatement updateStatement = DBConnection.prepare(updateOrderString);
@@ -69,9 +68,8 @@ public class ProductMapper implements DataMapper {
             updateStatement.setString(1, product.getName());
             updateStatement.setString(2, product.getPicture());
             updateStatement.setInt(3, product.getInventory());
-            updateStatement.setInt(4, product.getSold_number());
-            updateStatement.setFloat(5, product.getPrice().getPrice());
-            updateStatement.setString(6, product.getDetail());
+            updateStatement.setFloat(4, product.getPrice().getPrice());
+            updateStatement.setString(5, product.getDetail());
 
             updateStatement.execute();
             System.out.println(updateStatement.toString());
@@ -95,7 +93,7 @@ public class ProductMapper implements DataMapper {
         Product targetProduct = new Product();
         IdentityMap<Product> productMap = IdentityMap.getInstance(targetProduct);
 
-        String deleteOrderString = "DELETE FROM public.product"
+        String deleteOrderString = "DELETE FROM public.product "
                 + "WHERE id = " + product.getId();
 
         PreparedStatement deleteStatement = DBConnection.prepare(deleteOrderString);

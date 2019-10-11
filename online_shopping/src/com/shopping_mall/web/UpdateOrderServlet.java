@@ -37,7 +37,7 @@ public class UpdateOrderServlet extends HttpServlet {
 		
 		User user = (User)session.getAttribute("curr_mbr");
 
-		order.setUserId(user.getId());
+		order.setUser_id(user.getId());
 		order.setRemark(remark);
 		
 		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");

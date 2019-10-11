@@ -1,7 +1,7 @@
 package com.shopping_mall.web.admin;
 
+
 import com.shopping_mall.entity.Product;
-import com.shopping_mall.mapper.ProductMapper;
 import com.shopping_mall.service.ProductService;
 
 import javax.servlet.ServletException;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/deleteProduct")
-public class DeleteProductServlet extends HttpServlet {
+@WebServlet("/admin/jumpProduct")
+public class ProductJumpServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,12 +24,12 @@ public class DeleteProductServlet extends HttpServlet {
         int id = Integer.parseInt(product_id);
 
         Product product = new Product();
-        product.setId(id);
 
         ProductService productService = new ProductService();
-        productService.deleteProduct(product);
+        product = productService.findById(id);
+        request.setAttribute("product", product);
 
-        response.sendRedirect(request.getContextPath() + "/admin/product");
+        request.getRequestDispatcher("/admin/edit_product.jsp").forward(request, response);
 
     }
 }

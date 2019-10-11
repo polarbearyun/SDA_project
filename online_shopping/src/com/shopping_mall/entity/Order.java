@@ -12,6 +12,8 @@ public class Order extends DomainObject {
 
     private Integer user_id;
 
+
+
     private Integer total_price;
 
     private Date create_time;
@@ -65,12 +67,11 @@ public class Order extends DomainObject {
     }
 
 
-    public Integer getUserId() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-
-    public void setUserId(Integer user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 

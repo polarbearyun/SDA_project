@@ -37,10 +37,8 @@
                     <thead>
                     <tr class="text-center">
                         <td style="width: 80px">Order Number</td>
-                        <td style="width: 80px">User Name</td>
+                        <td style="width: 80px">User ID</td>
                         <td style="width: 80px">Total Price</td>
-                        <td style="width: 80px">Create Time</td>
-                        <td style="width: 80px">Payment Time</td>
                         <td style="width: 100px">Remark</td>
                         <td style="width: 80px">Status</td>
                         <td style="width: 80px"></td>
@@ -50,18 +48,16 @@
                     <tbody>
                     <c:forEach items="${orders}" var="ord">
                         <tr>
-                            <td class="text-center"> ${ord.number}</td>
+                             <td class="text-center"> ${ord.number}</td>
                             <td class="text-center"> ${ord.user_id}</td>
                             <td class="text-center"><fmt:formatNumber
                                     value="${ord.total_price}" pattern="$#,##0.00" /></td>
-                            <td class="text-center">${ord.create_time}</td>
-                            <td class="text-center">${ord.payment_time}</td>
                             <td class="text-center">${ord.remark}</td>
                             <td class="text-center">${ord.status}</td>
 
-                            <td><a href="${ctx}/admin/editOrderByAdmin?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/jumpOrder?id=${ord.id}"
                                    class="deleter">Edit</a></td>
-                            <td><a href="${ctx}/admin/deleteOrderByAdmin?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/deleteOrder?id=${ord.id}"
                                    class="deleter">Delete</a></td>
                         </tr>
                     </c:forEach>

@@ -33,7 +33,7 @@
                 <div class="panel-heading">
                     <strong><i class="icon-shopping-cart"> </i>Product Manage</strong>
 
-                    <strong> <a class="pull-right"  href="${ctx}/admin/addProduct">ADD</a></strong>
+                    <strong> <a class="pull-right"  href="${ctx}/admin/add_product.jsp">ADD</a></strong>
 
                 </div>
                 <table class="table table-hover table-striped tablesorter">
@@ -57,9 +57,9 @@
                             <td class="text-center">${ord.detail}</td>
                             <td class="text-center">${ord.inventory}</td>
 
-                            <td><a href="${ctx}/admin/editProductByAdmin?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/jumpProduct?id=${ord.id}"
                                         class="deleter">Edit</a></td>
-                            <td><a href="${ctx}/admin/deleteProductByAdmin?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/deleteProduct?id=${ord.id}"
                                class="deleter">Delete</a></td>
                         </tr>
                     </c:forEach>

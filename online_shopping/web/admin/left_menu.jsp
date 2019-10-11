@@ -16,7 +16,7 @@
         <li class="nav-parent show"><a href="javascript:;"> </a>
             <ul class="nav">
                 <li ${param.tag == 'order_list' ? "class='active' " : ""}><a
-                        href="${ctx}/admin/order_list.jsp"><i class="icon-list-alt"></i>
+                        href="${ctx}/admin/order_list"><i class="icon-list-alt"></i>
                     Order List<i class="icon-chevron-right"></i></a></li>
             </ul></li>
     </ul>

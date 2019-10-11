@@ -4,6 +4,7 @@ import com.shopping_mall.common.DBConnection;
 import com.shopping_mall.common.IdentityMap;
 import com.shopping_mall.entity.DomainObject;
 import com.shopping_mall.entity.Order;
+import com.shopping_mall.entity.Product;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -30,7 +31,7 @@ public class OrderMapper implements DataMapper{
         try {
 
             stmt.setInt(1, order.getId());
-            stmt.setInt(2, order.getUserId());
+            stmt.setInt(2, order.getUser_id());
             stmt.setFloat(3, order.getTotal_price());
             stmt.setString(4, order.getRemark());
             stmt.setInt(5, order.getStatus());
@@ -76,8 +77,9 @@ public class OrderMapper implements DataMapper{
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String deleteOrder = "DELETE * public.t_order WHERE "
+        String deleteOrder = "DELETE FROM public.t_order WHERE "
                 + "id = '" + order.getId() + "'";
+
         PreparedStatement stmt = DBConnection.prepare(deleteOrder);
         try {
             stmt.execute();
@@ -164,6 +166,38 @@ public class OrderMapper implements DataMapper{
         }
         return orderList;
     }
+
+    public static Order findById(int orderId){
+
+        Order targetOrder = new Order();
+        IdentityMap<Order> orderMap = IdentityMap.getInstance(targetOrder);
+        targetOrder = orderMap.get(Long.valueOf(orderId));
+        if(targetOrder != null){
+            return targetOrder;
+        }
+
+
+        String findOrderString ="SELECT * FROM public.t_order WHERE id = " + orderId;
+        System.out.println(findOrderString);
+        PreparedStatement findAllStatement = DBConnection.prepare(findOrderString);
+        Order order = null;
+
+        try {
+            ResultSet rs = findAllStatement.executeQuery();
+            while(rs.next()) {
+                order = load(rs);
+            }
+            DBConnection.close(findAllStatement);
+            rs.close();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return order;
+    }
+
 
     public static Order load(ResultSet rs) {
 

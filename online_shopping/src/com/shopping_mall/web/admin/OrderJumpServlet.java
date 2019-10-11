@@ -1,8 +1,7 @@
 package com.shopping_mall.web.admin;
 
-import com.shopping_mall.entity.Product;
-import com.shopping_mall.mapper.ProductMapper;
-import com.shopping_mall.service.ProductService;
+import com.shopping_mall.entity.Order;
+import com.shopping_mall.service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/deleteProduct")
-public class DeleteProductServlet extends HttpServlet {
+
+@WebServlet("/admin/jumpOrder")
+public class OrderJumpServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,16 +20,16 @@ public class DeleteProductServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String product_id = request.getParameter("id");
-        int id = Integer.parseInt(product_id);
+        String order_id = request.getParameter("id");
+        int id = Integer.parseInt(order_id);
 
-        Product product = new Product();
-        product.setId(id);
+        Order order = new Order();
 
-        ProductService productService = new ProductService();
-        productService.deleteProduct(product);
+        OrderService service = new OrderService();
+        order = service.findById(id);
+        request.setAttribute("order", order);
 
-        response.sendRedirect(request.getContextPath() + "/admin/product");
+        request.getRequestDispatcher("/admin/edit_order.jsp").forward(request, response);
 
     }
 }

@@ -41,7 +41,7 @@ public class OrderService {
         unitOfWork.commit();
     }
 
-    public void updateOrder(Order order) throws Exception {
+    public void updateOrder(Order order) {
 
 
         unitOfWork.registerDirty(order);
@@ -49,7 +49,7 @@ public class OrderService {
 
     }
 
-    public void deleteOrder(Order order) throws Exception {
+    public void deleteOrder(Order order) {
 
         unitOfWork.registerDeleted(order);
         unitOfWork.commit();
@@ -63,6 +63,11 @@ public class OrderService {
     public ArrayList<Order> viewAllOrderOfUser(int userId){
         ArrayList<Order> orderList = OrderMapper.findOrdersByUserId(userId);
         return orderList;
+    }
+
+    public Order findById(int orderId){
+
+            return OrderMapper.findById(orderId);
     }
 
 

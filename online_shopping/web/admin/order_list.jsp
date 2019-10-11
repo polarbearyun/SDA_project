@@ -13,7 +13,7 @@
 <html lang="zh-cn">
 <head>
     <jsp:include page="/icd_meta.jsp" />
-    <title>Member PAGE</title>
+    <title>Order Management</title>
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
@@ -36,33 +36,33 @@
                 <table class="table table-hover table-striped tablesorter">
                     <thead>
                     <tr class="text-center">
-                        <td style="width: 60px">ID</td>
-                        <td style="width: 80px">Amount</td>
-                        <td style="width: 80px" class="text-right">Price</td>
-                        <td style="width: 200px">Status</td>
-                        <td style="width: 280px">Remark</td>
+                        <td style="width: 80px">Order Number</td>
+                        <td style="width: 80px">User Name</td>
+                        <td style="width: 80px">Total Price</td>
+                        <td style="width: 80px">Create Time</td>
+                        <td style="width: 80px">Payment Time</td>
+                        <td style="width: 100px">Remark</td>
+                        <td style="width: 80px">Status</td>
+                        <td style="width: 80px"></td>
+                        <td style="width: 80px"></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page}" var="ord">
+                    <c:forEach items="${orders}" var="ord">
                         <tr>
-                            <td class="text-center">${ord.number}</td>
-                            <td class="text-center">
-                                <c:forEach items="${ord.item}" var="item" varStatus="vs">
-                                    <c:if test="${vs.index >0}">
-                                        <br />
-                                    </c:if>
-                                    <a href="${ctx}/product_detail?id=${item.product_id}">ProductID:${item.order_id}</a>
-                                    x${item.amount}
-                                </c:forEach></td>
-                            <td class="text-right"><fmt:formatNumber
+                            <td class="text-center"> ${ord.number}</td>
+                            <td class="text-center"> ${ord.user_id}</td>
+                            <td class="text-center"><fmt:formatNumber
                                     value="${ord.total_price}" pattern="$#,##0.00" /></td>
-                            <td class="text-center">
-                                <c:choose>
-                                    <c:when test="${ord.status==2}">Paid</c:when>
-                                </c:choose>
-                            </td>
+                            <td class="text-center">${ord.create_time}</td>
+                            <td class="text-center">${ord.payment_time}</td>
                             <td class="text-center">${ord.remark}</td>
+                            <td class="text-center">${ord.status}</td>
+
+                            <td><a href="${ctx}/admin/editOrderByAdmin?id=${entry.key.id}"
+                                   class="deleter">Edit</a></td>
+                            <td><a href="${ctx}/admin/deleteOrderByAdmin?id=${entry.key.id}"
+                                   class="deleter">Delete</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

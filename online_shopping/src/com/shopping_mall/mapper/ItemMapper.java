@@ -21,7 +21,7 @@ public class ItemMapper implements DataMapper {
         //Item targetItem = new Item();
         //IdentityMap<Item> itemMap = IdentityMap.getInstance(targetItem);
 
-        String createItemString = "INSERT INTO item" + "( order_id, product_id, amount, total_price)" +"VALUES ( ?, ?, ?, ?)";
+        String createItemString = "INSERT INTO public.item" + "( order_id, product_id, amount, total_price)" +"VALUES ( ?, ?, ?, ?)";
         PreparedStatement createStatement = DBConnection.prepare(createItemString);
 
         try {
@@ -58,7 +58,7 @@ public class ItemMapper implements DataMapper {
         Item targetItem = new Item();
         IdentityMap<Item> orderMap = IdentityMap.getInstance(targetItem);
 
-        String deleteOrderString = "DELETE FROM item"
+        String deleteOrderString = "DELETE FROM public.item"
                 + "WHERE id = " + item.getId();
 
         PreparedStatement deleteStatement = DBConnection.prepare(deleteOrderString);
@@ -80,7 +80,7 @@ public class ItemMapper implements DataMapper {
         Item targetItem = new Item();
         IdentityMap<Item> itemIdentityMap = IdentityMap.getInstance(targetItem);
 
-        String findOrdersByUserId = "SELECT * FROM item where order_id=" + "'" + order_id + "'";
+        String findOrdersByUserId = "SELECT * FROM public.item where order_id=" + "'" + order_id + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findOrdersByUserId);
         ArrayList<Item> itemList = new ArrayList<Item>();

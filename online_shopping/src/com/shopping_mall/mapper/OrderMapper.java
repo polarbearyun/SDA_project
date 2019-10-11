@@ -20,7 +20,7 @@ public class OrderMapper implements DataMapper{
         //Order targetOrder = new Order();
        // IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String createOrder = "INSERT INTO t_order"
+        String createOrder = "INSERT INTO public.t_order"
                 + "(id,user_id, total_price, remark, status, order_number)"
                 + "VALUES (?,?,?,?,?,?)";
 
@@ -54,7 +54,7 @@ public class OrderMapper implements DataMapper{
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String updateOrder = "UPDATE ORDER SET status='" + order.getStatus() +
+        String updateOrder = "UPDATE public.t_order SET status='" + order.getStatus() +
                 "' WHERE id='" + order.getId() + "'";
         PreparedStatement stmt = DBConnection.prepare(updateOrder);
         try {
@@ -76,7 +76,7 @@ public class OrderMapper implements DataMapper{
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String deleteOrder = "DELETE * ORDER WHERE "
+        String deleteOrder = "DELETE * public.t_order WHERE "
                 + "id = '" + order.getId() + "'";
         PreparedStatement stmt = DBConnection.prepare(deleteOrder);
         try {
@@ -101,7 +101,7 @@ public class OrderMapper implements DataMapper{
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
 
-        String findOrdersByUserId = "SELECT * FROM t_order where user_id=" + "'" + user_id + "'";
+        String findOrdersByUserId = "SELECT * FROM public.t_order where user_id=" + "'" + user_id + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findOrdersByUserId);
         ArrayList<Order> orderList = new ArrayList<Order>();
@@ -139,7 +139,7 @@ public class OrderMapper implements DataMapper{
         Order order = null;
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
-        String findOrders = "SELECT * FROM t_order";
+        String findOrders = "SELECT * FROM public.t_order";
         PreparedStatement stmt = DBConnection.prepare(findOrders);
         ArrayList<Order> orderList = new ArrayList<Order>();
 

@@ -14,7 +14,7 @@ public class AddressMapper implements DataMapper {
     public void insert(DomainObject obj) {
         assert !(obj instanceof Address) : "obj is not a address object";
         Address address = (Address)obj;
-        String createAddress = "INSERT INTO address "
+        String createAddress = "INSERT INTO public.address "
                 + "(address, contact_name, post_code, user_id)"
                 + "VALUES (?,?,?,?)";
         PreparedStatement stmt = DBConnection.prepare(createAddress);
@@ -45,7 +45,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String updateAddress = "UPDATE address SET address='" + address.getAddress() +
+        String updateAddress = "UPDATE address SET public.address='" + address.getAddress() +
                 "', + state='" + address.getState() +
                 //"', + user_id='" + address.getUser_id() +
                 "', + post_code='" + address.getPost_code() +
@@ -74,7 +74,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String deleteAddress = "DELETE * address WHERE "
+        String deleteAddress = "DELETE * public.address WHERE "
                 + "id = '" + address.getId() + "'";
 
         PreparedStatement stmt = DBConnection.prepare(deleteAddress);
@@ -100,7 +100,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String findAllAddress = "SELECT * from address "
+        String findAllAddress = "SELECT * from public.address "
                 + "WHERE user_id = " + userId;
         PreparedStatement stmt = DBConnection.prepare(findAllAddress);
         ArrayList<Address> addressList = new ArrayList<Address>();
@@ -135,7 +135,7 @@ public class AddressMapper implements DataMapper {
         Address addr = new Address();
         IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
 
-        String findAllAddress = "SELECT * from address "
+        String findAllAddress = "SELECT * from public.address "
                 + "WHERE id = " + addressId;
         PreparedStatement stmt = DBConnection.prepare(findAllAddress);
         Address addressRes = new Address();

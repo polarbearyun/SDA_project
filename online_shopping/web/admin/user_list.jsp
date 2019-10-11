@@ -39,9 +39,6 @@
                         <td style="width: 100px">Email</td>
                         <td style="width: 80px">Name</td>
                         <td style="width: 80px">Phone</td>
-                        <td style="width: 280px" class="text-center">Address</td>
-                        <td style="width: 80px">State</td>
-                        <td style="width: 80px">Post_Code</td>
                         <td style="width: 80px"></td>
                         <td style="width: 80px"></td>
                     </tr>
@@ -52,13 +49,6 @@
                             <td class="text-center"> ${ord.email}</td>
                             <td class="text-center"> ${ord.name}</td>
                             <td class="text-center"> ${ord.phone}</td>
-                            <c:forEach items="${ord.address}" var="item" varStatus="vs">
-                                <c:if test="${vs.index >0}">
-                                    <td class="text-center">${ord.address.address}</td>
-                                    <td class="text-center">${ord.address.state}</td>
-                                    <td class="text-center">${ord.address.post_code}</td>
-                                </c:if>
-                            </c:forEach>
 
                             <td><a href="${ctx}/admin/editUserByAdmin?id=${entry.key.id}"
                                    class="deleter">Edit</a></td>

@@ -10,7 +10,7 @@
         <li class="nav-parent show"><a href="javascript:;"> </a>
             <ul class="nav">
                 <li ${param.tag == 'user_list' ? "class='active' " : ""}><a
-                        href="${ctx}/admin/user_list.jsp"><i class="icon-list-alt"></i>
+                        href="${ctx}/admin/user_list"><i class="icon-list-alt"></i>
                     User List<i class="icon-chevron-right"></i></a></li>
             </ul></li>
         <li class="nav-parent show"><a href="javascript:;"> </a>

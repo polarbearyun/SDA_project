@@ -21,7 +21,7 @@ public class UserMapper implements DataMapper{
 
         String createUser = "INSERT INTO public.member "
                 + "(email, name, password, type, phone)"
-                + "VALUES (?,?,?,?,?)";
+                + " VALUES (?,?,?,?,?)";
 
         PreparedStatement stmt = DBConnection.prepare(createUser);
 
@@ -159,6 +159,44 @@ public class UserMapper implements DataMapper{
                 + "WHERE email = '" + email + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findUserByEmail);
+
+        try {
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                user = load(rs);
+            }
+            DBConnection.close(stmt);
+            rs.close();
+
+        } catch (SQLException e) {
+            System.out.println("Exception!");
+            e.printStackTrace();
+        }
+        if(user != null) {
+            targetUser = userIdentityMap.get(user.getId());
+            if(targetUser == null) {
+                userIdentityMap.put(user.getId(), user);
+                return user;
+            }
+            else
+                return targetUser;
+        }
+        return user;
+    }
+
+    /**
+     * Find a user by the user's email
+     */
+    public static User findUserById(int id) {
+
+        User user = null;
+        User targetUser = new User();
+        IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
+
+        String findUserById = "SELECT * FROM public.member "
+                + "WHERE id = '" + id + "'";
+
+        PreparedStatement stmt = DBConnection.prepare(findUserById);
 
         try {
             ResultSet rs = stmt.executeQuery();

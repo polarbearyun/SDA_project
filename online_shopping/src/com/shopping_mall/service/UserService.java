@@ -28,6 +28,10 @@ public class UserService {
         userMapper.update(user);
     }
 
+    public void deleteUser(User user) {
+        userMapper.delete(user);
+    }
+
 
     /**
      * View all user in the database
@@ -43,6 +47,10 @@ public class UserService {
 
     public User getUserByEmail(String email) throws SQLException {
         return UserMapper.findUserByEmail(email);
+    }
+
+    public User getUserById(int id) throws SQLException {
+        return UserMapper.findUserById(id);
     }
 
 }

@@ -159,7 +159,7 @@ public class ProductMapper implements DataMapper {
         }
 
 
-        String findProductString ="SELECT * FROM product WHERE id = " + productId;
+        String findProductString ="SELECT * FROM public.product WHERE id = " + productId;
         System.out.println(findProductString);
         PreparedStatement findAllStatement = DBConnection.prepare(findProductString);
         Product product = null;

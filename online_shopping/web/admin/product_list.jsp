@@ -17,7 +17,7 @@
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
-<jsp:include page="/icd_top.jsp"></jsp:include>
+<jsp:include page="/admin/top_menu.jsp"></jsp:include>
 
 <div class="wrapper" style="min-height: 530px">
 

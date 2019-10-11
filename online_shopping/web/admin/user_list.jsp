@@ -17,7 +17,7 @@
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
-<jsp:include page="/icd_top.jsp"></jsp:include>
+<jsp:include page="/admin/top_menu.jsp"></jsp:include>
 
 <div class="wrapper" style="min-height: 530px">
 
@@ -31,7 +31,7 @@
         <div class="col-xs-10">
             <div class="panel">
                 <div class="panel-heading">
-                    <strong><i class="icon-shopping-cart"> </i>Order Manage</strong>
+                    <strong><i class="icon-shopping-cart"> </i>User Manage</strong>
                 </div>
                 <table class="table table-hover table-striped tablesorter">
                     <thead>

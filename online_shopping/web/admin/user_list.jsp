@@ -32,6 +32,7 @@
             <div class="panel">
                 <div class="panel-heading">
                     <strong><i class="icon-shopping-cart"> </i>User Manage</strong>
+                    <strong> <a class="pull-right"  href="${ctx}/admin/add_user.jsp">ADD</a></strong>
                 </div>
                 <table class="table table-hover table-striped tablesorter">
                     <thead>
@@ -50,7 +51,7 @@
                             <td class="text-center"> ${ord.name}</td>
                             <td class="text-center"> ${ord.phone}</td>
 
-                            <td><a href="${ctx}/admin/editUserByAdmin?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/userInfoJump?id=${entry.key.id}"
                                    class="deleter">Edit</a></td>
                             <td><a href="${ctx}/admin/deleteUserByAdmin?id=${entry.key.id}"
                                    class="deleter">Delete</a></td>

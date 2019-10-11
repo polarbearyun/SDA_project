@@ -13,7 +13,7 @@
 <html lang="zh-cn">
 <head>
     <jsp:include page="/icd_meta.jsp" />
-    <title>Member PAGE</title>
+    <title>User Management</title>
     <jsp:include page="/icd_link.jsp" />
 </head>
 <body>
@@ -36,33 +36,34 @@
                 <table class="table table-hover table-striped tablesorter">
                     <thead>
                     <tr class="text-center">
-                        <td style="width: 60px">ID</td>
-                        <td style="width: 80px">Amount</td>
-                        <td style="width: 80px" class="text-right">Price</td>
-                        <td style="width: 200px">Status</td>
-                        <td style="width: 280px">Remark</td>
+                        <td style="width: 100px">Email</td>
+                        <td style="width: 80px">Name</td>
+                        <td style="width: 80px">Phone</td>
+                        <td style="width: 280px" class="text-center">Address</td>
+                        <td style="width: 80px">State</td>
+                        <td style="width: 80px">Post_Code</td>
+                        <td style="width: 80px"></td>
+                        <td style="width: 80px"></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${page}" var="ord">
+                    <c:forEach items="${users}" var="ord">
                         <tr>
-                            <td class="text-center">${ord.number}</td>
-                            <td class="text-center">
-                                <c:forEach items="${ord.item}" var="item" varStatus="vs">
-                                    <c:if test="${vs.index >0}">
-                                        <br />
-                                    </c:if>
-                                    <a href="${ctx}/product_detail?id=${item.product_id}">ProductID:${item.order_id}</a>
-                                    x${item.amount}
-                                </c:forEach></td>
-                            <td class="text-right"><fmt:formatNumber
-                                    value="${ord.total_price}" pattern="$#,##0.00" /></td>
-                            <td class="text-center">
-                                <c:choose>
-                                    <c:when test="${ord.status==2}">Paid</c:when>
-                                </c:choose>
-                            </td>
-                            <td class="text-center">${ord.remark}</td>
+                            <td class="text-center"> ${ord.email}</td>
+                            <td class="text-center"> ${ord.name}</td>
+                            <td class="text-center"> ${ord.phone}</td>
+                            <c:forEach items="${ord.address}" var="item" varStatus="vs">
+                                <c:if test="${vs.index >0}">
+                                    <td class="text-center">${ord.address.address}</td>
+                                    <td class="text-center">${ord.address.state}</td>
+                                    <td class="text-center">${ord.address.post_code}</td>
+                                </c:if>
+                            </c:forEach>
+
+                            <td><a href="${ctx}/admin/editUserByAdmin?id=${entry.key.id}"
+                                   class="deleter">Edit</a></td>
+                            <td><a href="${ctx}/admin/deleteUserByAdmin?id=${entry.key.id}"
+                                   class="deleter">Delete</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

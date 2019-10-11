@@ -19,7 +19,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String createUser = "INSERT INTO member "
+        String createUser = "INSERT INTO public.member "
                 + "(email, name, password, type, phone)"
                 + "VALUES (?,?,?,?,?)";
 
@@ -55,7 +55,7 @@ public class UserMapper implements DataMapper{
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
 
-        String updateUserString = "UPDATE member SET "+
+        String updateUserString = "UPDATE public.member SET "+
                 "email=?, name=?, password=?, type=?, phone=?  WHERE id =" + user.getId();
         PreparedStatement updateStatement = DBConnection.prepare(updateUserString);
 
@@ -89,7 +89,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String deleteUser = "DELETE * USER WHERE "
+        String deleteUser = "DELETE * public.member WHERE "
                 + "id = '" + user.getId() + "'";
 
         PreparedStatement stmt = DBConnection.prepare(deleteUser);
@@ -116,7 +116,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findUserByName = "SELECT * FROM USER "
+        String findUserByName = "SELECT * FROM public.member "
                 + "WHERE name = '" + username + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findUserByName);
@@ -155,7 +155,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findUserByEmail = "SELECT * FROM member "
+        String findUserByEmail = "SELECT * FROM public.member "
                 + "WHERE email = '" + email + "'";
 
         PreparedStatement stmt = DBConnection.prepare(findUserByEmail);
@@ -193,7 +193,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findAllUsers = "SELECT * FROM USER";
+        String findAllUsers = "SELECT * FROM public.member";
         PreparedStatement stmt = DBConnection.prepare(findAllUsers);
         ArrayList<User> userList = new ArrayList<User>();
 

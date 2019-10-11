@@ -39,12 +39,12 @@
                                        placeholder="Name" class="form-control input-lg">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="picture" id="picture" value=""
+                                <input type="text" readonly="readonly" name="picture" id="picture" value="https://assets.adidas.com/images/w_385,h_385,f_auto,q_auto:sensitive,fl_lossy/025f2a9492e14bc9a07baaaf0098f4e1_9366/pharrell-wil"
                                        placeholder="Picture URL" class="form-control input-lg">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="inventory" id="inventory" value=""
-                                       placeholder="Inventory" class="form-control input-lg">
+                                       placeholder="Inventory(cannot input 0)" class="form-control input-lg">
                             </div>
                             <div class="form-group">
                                 <input type="text" name="price" id="price" value=""

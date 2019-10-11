@@ -24,12 +24,12 @@ public class DeleteOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String order_id = request.getParameter("id");
         int id = Integer.parseInt(order_id);
-
-        Order order = new Order();
-        order.setId(id);
-
         OrderService service = new OrderService();
-        service.deleteOrder(order);
+        Order order = service.findById(id);
+        order.setStatus(8);
+
+
+        service.updateOrder(order);
 
         response.sendRedirect(request.getContextPath() + "/admin/order_list");
 

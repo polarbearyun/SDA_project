@@ -114,7 +114,7 @@ public class ProductMapper implements DataMapper {
     }
 
     public ArrayList<Product> getAllProduct(){
-        String findAllProductString = "SELECT * FROM public.product";
+        String findAllProductString = "SELECT * FROM public.product where inventory > 0";
         PreparedStatement findAllStatement = DBConnection.prepare(findAllProductString);
         ArrayList<Product> productList = new ArrayList<>();
 

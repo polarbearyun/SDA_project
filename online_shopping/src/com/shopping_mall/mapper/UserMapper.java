@@ -89,7 +89,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String deleteUser = "DELETE * public.member WHERE "
+        String deleteUser = "DELETE FROM public.member WHERE "
                 + "id = '" + user.getId() + "'";
 
         PreparedStatement stmt = DBConnection.prepare(deleteUser);
@@ -231,7 +231,7 @@ public class UserMapper implements DataMapper{
         User targetUser = new User();
         IdentityMap<User> userIdentityMap = IdentityMap.getInstance(targetUser);
 
-        String findAllUsers = "SELECT * FROM public.member";
+        String findAllUsers = "SELECT * FROM public.member where type = 0";
         PreparedStatement stmt = DBConnection.prepare(findAllUsers);
         ArrayList<User> userList = new ArrayList<User>();
 

@@ -141,7 +141,7 @@ public class OrderMapper implements DataMapper{
         Order order = null;
         Order targetOrder = new Order();
         IdentityMap<Order> orderIdentityMap = IdentityMap.getInstance(targetOrder);
-        String findOrders = "SELECT * FROM public.t_order";
+        String findOrders = "SELECT * FROM public.t_order where status < 5";
         PreparedStatement stmt = DBConnection.prepare(findOrders);
         ArrayList<Order> orderList = new ArrayList<Order>();
 

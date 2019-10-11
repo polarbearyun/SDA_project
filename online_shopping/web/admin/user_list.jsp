@@ -51,9 +51,9 @@
                             <td class="text-center"> ${ord.name}</td>
                             <td class="text-center"> ${ord.phone}</td>
 
-                            <td><a href="${ctx}/admin/userInfoJump?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/userInfoJump?id=${ord.id}"
                                    class="deleter">Edit</a></td>
-                            <td><a href="${ctx}/admin/deleteUserByAdmin?id=${entry.key.id}"
+                            <td><a href="${ctx}/admin/deleteUserByAdmin?id=${ord.id}"
                                    class="deleter">Delete</a></td>
                         </tr>
                     </c:forEach>

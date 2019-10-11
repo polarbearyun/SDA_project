@@ -23,11 +23,11 @@ public class DeleteProductServlet extends HttpServlet {
         String product_id = request.getParameter("id");
         int id = Integer.parseInt(product_id);
 
-        Product product = new Product();
-        product.setId(id);
-
         ProductService productService = new ProductService();
-        productService.deleteProduct(product);
+        Product product = productService.findById(id);
+        product.setInventory(0);
+
+        productService.updateProduct(product);
 
         response.sendRedirect(request.getContextPath() + "/admin/product");
 

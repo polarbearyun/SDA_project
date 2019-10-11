@@ -49,7 +49,7 @@ public class UserService {
         return UserMapper.findUserByEmail(email);
     }
 
-    public User getUserById(int id) throws SQLException {
+    public User getUserById(int id){
         return UserMapper.findUserById(id);
     }
 

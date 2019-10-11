@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("admin/userInfoJump")
+@WebServlet("/admin/userInfoJump")
 public class JumpUserInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -27,11 +27,7 @@ public class JumpUserInfoServlet extends HttpServlet {
 
         UserService userService = new UserService();
         User user = null;
-        try {
-            user = userService.getUserById(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        user = userService.getUserById(id);
         request.setAttribute("user", user);
 
         request.getRequestDispatcher("/admin/edit_user.jsp").forward(request, response);

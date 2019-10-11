@@ -23,11 +23,11 @@ public class DeleteUserServlet extends HttpServlet {
         String user_id = request.getParameter("id");
         int id = Integer.parseInt(user_id);
 
-        User user = new User();
-        user.setId(id);
-
+        User user = null;
         UserService userService = new UserService();
-        userService.deleteUser(user);
+        user = userService.getUserById(id);
+        user.setType(5);
+        userService.updateUser(user);
 
         response.sendRedirect(request.getContextPath() + "/admin/user_list");
     }

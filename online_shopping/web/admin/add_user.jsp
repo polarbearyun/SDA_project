@@ -54,8 +54,7 @@
 
 
                             <button type="submit" class="btn btn-primary btn-wider btn-lg">Confirm</button>
-                            &nbsp; &nbsp;
-                            <button type="reset" class="btn btn-wider btn-lg">Cancel</button>
+                            <button type="button" class="btn btn-primary btn-wider btn-lg" onclick="history.back(-1);">Back</button>
                         </form>
                     </div>
                 </div>

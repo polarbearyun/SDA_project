@@ -50,4 +50,9 @@ public class AddressService {
         return address;
     }
 
+    public Address viewOneAddressByUserId(int userId){
+        Address address = AddressMapper.findOneAddressById(userId);
+        return address;
+    }
+
 }

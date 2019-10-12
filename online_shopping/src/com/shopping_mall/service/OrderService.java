@@ -76,7 +76,7 @@ public class OrderService {
 
         int index = list.size();
 
-        int orderId = index +1;
+        int orderId = index +100;
 
 
         return orderId;

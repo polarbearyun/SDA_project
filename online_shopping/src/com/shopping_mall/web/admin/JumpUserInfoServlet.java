@@ -1,6 +1,8 @@
 package com.shopping_mall.web.admin;
 
+import com.shopping_mall.entity.Address;
 import com.shopping_mall.entity.User;
+import com.shopping_mall.service.AddressService;
 import com.shopping_mall.service.UserService;
 
 import javax.servlet.ServletException;
@@ -27,7 +29,10 @@ public class JumpUserInfoServlet extends HttpServlet {
 
         UserService userService = new UserService();
         User user = null;
+        AddressService addressServices = new AddressService();
         user = userService.getUserById(id);
+        Address address = addressServices.viewOneAddressByUserId(id);
+        user.setAddress(address);
         request.setAttribute("user", user);
 
         request.getRequestDispatcher("/admin/edit_user.jsp").forward(request, response);

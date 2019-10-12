@@ -16,7 +16,7 @@ public class User extends DomainObject{
 
     private Integer type;
 
-    private ArrayList<Address> address;
+    private Address address;
 
     private Boolean addressLoaded;
 
@@ -90,19 +90,27 @@ public class User extends DomainObject{
         this.type = type;
     }
 
-    public ArrayList<Address> getAddress() {
-        if(!addressLoaded) {
-            int userId = id;
-            this.address = AddressMapper.findAddressByUserId(userId);
-            this.addressLoaded = true;
-        }
+    public Address getAddress() {
         return address;
     }
 
-    public void reloadAddress() {
-        int userId = id;
-        this.address = AddressMapper.findAddressByUserId(userId);
-        this.addressLoaded = true;
+    public void setAddress(Address address) {
+        this.address = address;
     }
+
+//    public ArrayList<Address> getAddress() {
+//        if(!addressLoaded) {
+//            int userId = id;
+//            this.address = AddressMapper.findAddressByUserId(userId);
+//            this.addressLoaded = true;
+//        }
+//        return address;
+//    }
+//
+//    public void reloadAddress() {
+//        int userId = id;
+//        this.address = AddressMapper.findAddressByUserId(userId);
+//        this.addressLoaded = true;
+//    }
 
 }

@@ -165,6 +165,40 @@ public class AddressMapper implements DataMapper {
         return addressRes;
     }
 
+    public static Address findOneAddressById(int userId){
+        Address address = null;
+        Address addr = new Address();
+        IdentityMap<Address> addressIdentityMap = IdentityMap.getInstance(addr);
+
+        String findAllAddress = "SELECT * FROM public.address "
+                + "WHERE user_id = " + userId;
+        PreparedStatement stmt = DBConnection.prepare(findAllAddress);
+        Address addressRes = new Address();
+
+        try {
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                address = load(rs);
+
+                //addr = addressIdentityMap.get(address.getId());
+                if (addr == null) {
+                    addressRes = address;
+                    //addressIdentityMap.put(address.getId(), address);
+                } else {
+                    addressRes = address;
+                }
+            }
+            DBConnection.close(stmt);
+            rs.close();
+
+
+        } catch (SQLException e) {
+            System.out.println("Exception!");
+            e.printStackTrace();
+        }
+        return addressRes;
+    }
+
 
     public static Address load(ResultSet rs) {
 

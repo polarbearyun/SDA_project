@@ -30,6 +30,15 @@
                     <form action="${ctx}/admin/editUser" method="post"
                           id="profileForm" role="form" class="form-horizontal">
                         <div class="form-group">
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-4 required">
+                                <input type="hidden" name="id" id="id"
+                                       value="${user.id}"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-xs-2 control-label">Email</label>
                             <div class="col-xs-4 required">
                                 <input type="text" name="email" id="email"
@@ -64,12 +73,36 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-xs-2 control-label">Address</label>
+                            <div class="col-xs-4 required">
+                                <input type="text" name="address" id="address"
+                                       value="${user.address.address}"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">state</label>
+                            <div class="col-xs-4 required">
+                                <input type="text" name="state" id="state"
+                                       value="${user.address.state}"
+                                       class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-2 control-label">Password</label>
+                            <div class="col-xs-4 required">
+                                <input type="text" name="post_code" id="post_code"
+                                       value="${user.address.post_code}"
+                                       class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-xs-2"></div>
                             <div class="col-xs-10">
-                                <button type="reset" id="resetBtn" class="btn btn-default">Cancel</button>
-                                &nbsp;&nbsp;
-                                <button type="submit" id="submitBtn" class="btn btn-primary"
-                                        style="min-width: 80px">Confirm</button>
+                                <button type="submit" class="btn btn-primary btn-wider btn-lg">Submit</button>
+                                <button type="button" class="btn btn-primary btn-wider btn-lg" onclick="history.back(-1);">Back</button>
+
                             </div>
                         </div>
                     </form>
@@ -84,24 +117,5 @@
 <script src="${ctx}/js/jquery.scrollUp.min.js"></script>
 <script src="${ctx}/zui/js/zui.js"></script>
 <script src="${ctx}/js/my.js"></script>
-<script>
-    $("#profileForm").submit(function(){
-
-        var url = $(this).attr("action");
-        var param = $(this).serialize();
-
-        $.post(url, param, function(txt){
-            if("ok" == txt){
-
-                //$("#welcome").text("Welcome " + $("#nick_name").val() + "！");
-
-                $.zui.messager.show('Success!', {type: 'success'});
-            }else{
-                $.zui.messager.show('Failed', {type: 'danger'});
-            }
-        });
-        return false;
-    });
-</script>
 </body>
 </html>

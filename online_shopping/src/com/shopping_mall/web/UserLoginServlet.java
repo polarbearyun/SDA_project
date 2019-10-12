@@ -1,5 +1,6 @@
 package com.shopping_mall.web;
 
+import com.shopping_mall.common.Session;
 import com.shopping_mall.entity.Address;
 import com.shopping_mall.entity.User;
 import com.shopping_mall.entity.Order;
@@ -55,13 +56,14 @@ public class UserLoginServlet extends HttpServlet {
                 //login success
                 if (user.getType() == 0){
 
+                    Session.getInstance().createSession(request.getSession(),0,user.getId());
                     //record user data in this session
                     request.getSession().setAttribute("curr_mbr", user);
 
                 // If the user login when commit order, then goto /order.jsp
                 // If not, goto the user profile page after login
                 Order order = (Order) request.getSession().getAttribute("current_order");
-                if (order != null) {
+                    if (order != null) {
                     AddressService addressService = new AddressService();
                     List<Address> addressList = null;
                     addressList = addressService.viewAllAddressOfUser(user.getId());
@@ -70,10 +72,11 @@ public class UserLoginServlet extends HttpServlet {
 
                     request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);
                     ;
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/main");
-                }
-            }else {
+                    } else {
+                    response.sendRedirect(request.getContextPath() + "/user/orders");
+                    }
+                }else {
+                    Session.getInstance().createSession(request.getSession(),2,user.getId());
                     request.getSession().setAttribute("curr_mbr", user);
                     response.sendRedirect(request.getContextPath() + "/admin/product");
                 }

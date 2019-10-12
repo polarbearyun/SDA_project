@@ -2,6 +2,8 @@ package com.shopping_mall.web.admin;
 
 import com.shopping_mall.entity.Price;
 import com.shopping_mall.entity.Product;
+import com.shopping_mall.mapper.LockingMapper;
+import com.shopping_mall.mapper.ProductMapper;
 import com.shopping_mall.service.ProductService;
 
 import javax.servlet.ServletException;
@@ -42,8 +44,14 @@ public class UpdateProductServlet extends HttpServlet {
         newProduct.setDetail(detail);
 
 
-        ProductService service = new ProductService();
-        service.updateProduct(newProduct);
+
+        ProductMapper mapper = new ProductMapper();
+        LockingMapper lockingMappermapper = new LockingMapper(mapper);
+        lockingMappermapper.update(newProduct);
+
+
+        //ProductService service = new ProductService();
+        //service.updateProduct(newProduct);
 
         response.sendRedirect(request.getContextPath() + "/admin/product");
     }

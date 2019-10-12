@@ -16,6 +16,15 @@ import java.util.List;
 
 public class ProductMapper implements DataMapper {
 
+    private static DataMapper instance;
+    public static DataMapper getInstance() {
+        if(instance == null) {
+            instance = new LockingMapper(new ProductMapper());
+        }
+        return instance;
+    }
+
+
     @Override
     public void insert(DomainObject obj) {
         // TODO Auto-generated method stub

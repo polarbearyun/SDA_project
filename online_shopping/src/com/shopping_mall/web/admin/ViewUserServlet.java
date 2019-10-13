@@ -1,7 +1,9 @@
 package com.shopping_mall.web.admin;
 
+import com.shopping_mall.common.Params;
 import com.shopping_mall.entity.User;
 import com.shopping_mall.mapper.UserMapper;
+import com.shopping_mall.security.AuthenticationEnforcer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +25,18 @@ public class ViewUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //UserMapper userMapper = new UserMapper();
-        ArrayList<User> userList =  UserMapper.findAllUsers();
-        request.setAttribute("users", userList);
+        if(AuthenticationEnforcer.checkAuthentication(request,"viewAllUsers") == Params.HAS_RIGHT) {
 
-        request.getRequestDispatcher("/admin/user_list.jsp").forward(request, response);
+            //UserMapper userMapper = new UserMapper();
+            ArrayList<User> userList = UserMapper.findAllUsers();
+            request.setAttribute("users", userList);
+
+            request.getRequestDispatcher("/admin/user_list.jsp").forward(request, response);
+        }else {
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().print("<html><body><script type='text/javascript'>alert('No Right！');</script></body></html>");
+            response.getWriter().close();
+        }
 
     }
 }

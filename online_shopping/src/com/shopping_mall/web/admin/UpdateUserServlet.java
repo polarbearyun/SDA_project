@@ -1,10 +1,12 @@
 package com.shopping_mall.web.admin;
 
+import com.shopping_mall.common.Params;
 import com.shopping_mall.datatransfer.UserAssembler;
 import com.shopping_mall.datatransfer.UserDTO;
 import com.shopping_mall.datatransfer.UserFacade;
 import com.shopping_mall.entity.Address;
 import com.shopping_mall.entity.User;
+import com.shopping_mall.security.AuthenticationEnforcer;
 import com.shopping_mall.service.UserService;
 
 import javax.servlet.ServletException;
@@ -25,40 +27,47 @@ public class UpdateUserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Integer id = Integer.valueOf(request.getParameter("id"));
-        String email = request.getParameter("email");
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String password = request.getParameter("password");
-        String addr_detail = request.getParameter("address");
-        String state = request.getParameter("state");
-        String post_code = request.getParameter("post_code");
+        if(AuthenticationEnforcer.checkAuthentication(request,"editUser")== Params.HAS_RIGHT) {
 
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setPassword(password);
-        user.setType(0);
+            Integer id = Integer.valueOf(request.getParameter("id"));
+            String email = request.getParameter("email");
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            String addr_detail = request.getParameter("address");
+            String state = request.getParameter("state");
+            String post_code = request.getParameter("post_code");
 
-        Address address = new Address();
-        address.setAddress(addr_detail);
-        address.setState(state);
-        address.setPost_code(post_code);
-        user.setAddress(address);
+            User user = new User();
+            user.setId(id);
+            user.setName(name);
+            user.setEmail(email);
+            user.setPhone(phone);
+            user.setPassword(password);
+            user.setType(0);
 
-        UserDTO dto = UserAssembler.createUserDTO(user);
+            Address address = new Address();
+            address.setAddress(addr_detail);
+            address.setState(state);
+            address.setPost_code(post_code);
+            user.setAddress(address);
 
-        String userStr = UserDTO.serialize(dto);
+            UserDTO dto = UserAssembler.createUserDTO(user);
 
-        UserFacade facade = new UserFacade();
-        facade.updateUserJSON(userStr);
+            String userStr = UserDTO.serialize(dto);
 
-        //UserService userService = new UserService();
-        //userService.updateUser(user);
+            UserFacade facade = new UserFacade();
+            facade.updateUserJSON(userStr);
 
-        response.sendRedirect(request.getContextPath() + "/admin/user_list");
+            //UserService userService = new UserService();
+            //userService.updateUser(user);
+
+            response.sendRedirect(request.getContextPath() + "/admin/user_list");
+        }else {
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().print("<html><body><script type='text/javascript'>alert('No Right！');</script></body></html>");
+            response.getWriter().close();
+        }
 
     }
 }

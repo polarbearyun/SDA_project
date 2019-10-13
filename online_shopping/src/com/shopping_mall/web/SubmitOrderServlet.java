@@ -1,6 +1,8 @@
 package com.shopping_mall.web;
 
+import com.shopping_mall.common.Params;
 import com.shopping_mall.entity.*;
+import com.shopping_mall.security.AuthenticationEnforcer;
 import com.shopping_mall.service.AddressService;
 import com.shopping_mall.service.ProductService;
 
@@ -72,17 +74,23 @@ public class SubmitOrderServlet extends HttpServlet {
 
 
         User user = (User)session.getAttribute("curr_mbr");
-        if(user == null){
+        int code = AuthenticationEnforcer.checkAuthentication(request,"submitOrder");
+        if(code == Params.NEED_TO_LOGIN){
 
             request.setAttribute("msg", "Please Login First!");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
 
-        }else{
+        }else if(code == Params.HAS_RIGHT){
             AddressService addressService = new AddressService();
             List<Address> addressList = addressService.viewAllAddressOfUser(user.getId());
             request.setAttribute("addressList", addressList);
 
             request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);
+        }else {
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().print("<html><body><script type='text/javascript'>alert('No Right To SUBMIT！');</script></body></html>");
+            response.getWriter().close();
+
         }
 
     }

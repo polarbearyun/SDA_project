@@ -2,6 +2,7 @@ package com.shopping_mall.web.admin;
 
 import com.shopping_mall.entity.Order;
 import com.shopping_mall.mapper.OrderMapper;
+import com.shopping_mall.security.AuthenticationEnforcer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,9 @@ public class ViewOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+
+        AuthenticationEnforcer.checkAuthentication(request,"viewAllOrders");
         //OrderMapper orderMapper = new OrderMapper();
         ArrayList<Order> orderList = OrderMapper.findAllOrders();
         request.setAttribute("orders", orderList);

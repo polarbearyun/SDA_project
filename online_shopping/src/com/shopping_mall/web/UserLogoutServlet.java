@@ -1,5 +1,7 @@
 package com.shopping_mall.web;
 
+import com.shopping_mall.common.Session;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,7 @@ public class UserLogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Session.getInstance().closeSession();
         request.getSession().invalidate();
 
         response.sendRedirect(request.getContextPath() + "/main");

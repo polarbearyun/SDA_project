@@ -1,6 +1,8 @@
 package com.shopping_mall.web.admin;
 
+import com.shopping_mall.common.Params;
 import com.shopping_mall.entity.User;
+import com.shopping_mall.security.AuthenticationEnforcer;
 import com.shopping_mall.service.UserService;
 
 import javax.servlet.ServletException;
@@ -20,15 +22,24 @@ public class DeleteUserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String user_id = request.getParameter("id");
-        int id = Integer.parseInt(user_id);
 
-        User user = null;
-        UserService userService = new UserService();
-        user = userService.getUserById(id);
-        user.setType(5);
-        userService.updateUser(user);
+        int code = AuthenticationEnforcer.checkAuthentication(request,"deleteUser");
+        if(code == Params.HAS_RIGHT){
+            String user_id = request.getParameter("id");
+            int id = Integer.parseInt(user_id);
 
-        response.sendRedirect(request.getContextPath() + "/admin/user_list");
+            User user = null;
+            UserService userService = new UserService();
+            user = userService.getUserById(id);
+            user.setType(5);
+            userService.updateUser(user);
+
+            response.sendRedirect(request.getContextPath() + "/admin/user_list");
+        }else {
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().print("<html><body><script type='text/javascript'>alert('No Right！');</script></body></html>");
+            response.getWriter().close();
+        }
+
     }
 }

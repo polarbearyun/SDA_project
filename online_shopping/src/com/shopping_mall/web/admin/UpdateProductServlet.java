@@ -1,9 +1,11 @@
 package com.shopping_mall.web.admin;
 
+import com.shopping_mall.common.Params;
 import com.shopping_mall.entity.Price;
 import com.shopping_mall.entity.Product;
 import com.shopping_mall.mapper.LockingMapper;
 import com.shopping_mall.mapper.ProductMapper;
+import com.shopping_mall.security.AuthenticationEnforcer;
 import com.shopping_mall.service.ProductService;
 
 import javax.servlet.ServletException;
@@ -24,35 +26,41 @@ public class UpdateProductServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Integer id = Integer.valueOf(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String picture = request.getParameter("picture");
-        Integer inventory = Integer.valueOf(request.getParameter("inventory"));
-        Integer price = Integer.valueOf(request.getParameter("price"));
-        String detail = request.getParameter("detail");
+        if(AuthenticationEnforcer.checkAuthentication(request,"editProduct")== Params.HAS_RIGHT) {
+
+            Integer id = Integer.valueOf(request.getParameter("id"));
+            String name = request.getParameter("name");
+            String picture = request.getParameter("picture");
+            Integer inventory = Integer.valueOf(request.getParameter("inventory"));
+            Integer price = Integer.valueOf(request.getParameter("price"));
+            String detail = request.getParameter("detail");
 
 
-        Price newPrice = new Price(price);
+            Price newPrice = new Price(price);
 
 
-        Product newProduct = new Product();
-        newProduct.setId(id);
-        newProduct.setName(name);
-        newProduct.setPicture(picture);
-        newProduct.setInventory(inventory);
-        newProduct.setPrice(newPrice);
-        newProduct.setDetail(detail);
+            Product newProduct = new Product();
+            newProduct.setId(id);
+            newProduct.setName(name);
+            newProduct.setPicture(picture);
+            newProduct.setInventory(inventory);
+            newProduct.setPrice(newPrice);
+            newProduct.setDetail(detail);
 
 
+            ProductMapper mapper = new ProductMapper();
+            LockingMapper lockingMappermapper = new LockingMapper(mapper);
+            lockingMappermapper.update(newProduct);
 
-        ProductMapper mapper = new ProductMapper();
-        LockingMapper lockingMappermapper = new LockingMapper(mapper);
-        lockingMappermapper.update(newProduct);
 
+            //ProductService service = new ProductService();
+            //service.updateProduct(newProduct);
 
-        //ProductService service = new ProductService();
-        //service.updateProduct(newProduct);
-
-        response.sendRedirect(request.getContextPath() + "/admin/product");
+            response.sendRedirect(request.getContextPath() + "/admin/product");
+        }else {
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().print("<html><body><script type='text/javascript'>alert('No Right！');</script></body></html>");
+            response.getWriter().close();
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.shopping_mall.web.admin;
 
 import com.shopping_mall.entity.Product;
 import com.shopping_mall.mapper.ProductMapper;
+import com.shopping_mall.security.AuthenticationEnforcer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +18,8 @@ public class ViewProductServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        AuthenticationEnforcer.checkAuthentication(request,"viewProduct");
 
         ProductMapper productMapper = new ProductMapper();
         ArrayList<Product> productList = productMapper.getAllProduct();

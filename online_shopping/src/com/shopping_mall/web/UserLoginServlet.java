@@ -1,9 +1,11 @@
 package com.shopping_mall.web;
 
+import com.shopping_mall.common.Params;
 import com.shopping_mall.common.Session;
 import com.shopping_mall.entity.Address;
 import com.shopping_mall.entity.User;
 import com.shopping_mall.entity.Order;
+import com.shopping_mall.security.AuthenticationEnforcer;
 import com.shopping_mall.service.AddressService;
 import com.shopping_mall.service.UserService;
 
@@ -50,6 +52,7 @@ public class UserLoginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+
         // GOTO
         if(user != null){
             if(user.getPassword().equals(password)) {
@@ -71,9 +74,8 @@ public class UserLoginServlet extends HttpServlet {
                     request.setAttribute("addressList", addressList);
 
                     request.getRequestDispatcher("/orderConfirm.jsp").forward(request, response);
-                    ;
                     } else {
-                    response.sendRedirect(request.getContextPath() + "/user/orders");
+                        response.sendRedirect(request.getContextPath() + "/user/orders");
                     }
                 }else {
                     Session.getInstance().createSession(request.getSession(),2,user.getId());

@@ -2,6 +2,7 @@ package com.shopping_mall.web.user;
 
 import com.shopping_mall.entity.Order;
 import com.shopping_mall.entity.User;
+import com.shopping_mall.security.AuthenticationEnforcer;
 import com.shopping_mall.service.OrderService;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,8 @@ public class ViewOrderListServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		System.err.println("========2========"+ AuthenticationEnforcer.checkAuthentication(req,"test"));
+
 		int number = 1;
 		int size = 10;
 		String n = req.getParameter("number");
